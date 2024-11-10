@@ -41,6 +41,13 @@
   color: #888;
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: "Sour Gummy", "Roboto", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 nav{
   background-color: saddlebrown;
 }
@@ -53,10 +60,10 @@ nav{
 }
 
 .carousel-image {
-  width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
-  height: auto; /* Mantiene la proporción de la imagen */
+  width: 100%; 
+  height: auto; 
   max-height: 100%;
-  object-fit: cover; /* Cubre todo el espacio sin distorsionar la imagen */
+  object-fit: cover; 
   object-position: bottom;
   transform: scale(1, 0.8);
 }
