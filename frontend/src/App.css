@@ -59,6 +59,9 @@ nav{
   overflow: hidden;
 }
 
+.logo {
+  height: 50px;
+}
 .carousel-image {
   width: 100%; 
   height: auto; 
