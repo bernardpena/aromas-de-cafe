@@ -41,6 +41,9 @@
   color: #888;
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* bernardo*/
 * {
   box-sizing: border-box;
@@ -58,16 +61,15 @@ body {
   padding: 10px; 
 
  /* main */ 
-@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+ 
+
+nav{
+  background-color: saddlebrown;
+}
 
 body {
   font-family: "Sour Gummy", "Roboto", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-}
-
-nav{
-  background-color: saddlebrown;
 }
 
 .navbar {
@@ -94,15 +96,23 @@ nav{
   height: auto; 
   max-height: 400px; 
 }
+
+.carousel-image {
+  width: 100%; 
+  height: auto; 
+  max-height: 100%;
+
   
- /* main */ 
- .logo {
-  height: 50px;
-}
+
   
   object-fit: cover; 
   object-position: bottom;
   transform: scale(1, 0.8);
+}
+
+ /* main */ 
+ .logo {
+  height: 50px;
 }
 
 .add-button{
@@ -136,4 +146,5 @@ body{
 /* Footer */
 .colorFondo {
   background-color: saddlebrown;
+}
 }
