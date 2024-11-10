@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useState, createContext } from 'react';
 import UserProvider from './context/UserProvider';
+import Footer from './components/Footer';
 
 export const UserContext = createContext();
 
@@ -25,6 +26,7 @@ function App() {
             <>
               <Header />
               <ProductList />
+              <Footer />
             </>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

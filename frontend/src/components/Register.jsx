@@ -1,5 +1,3 @@
-// frontend/src/components/Register.jsx
-
 import { useState } from 'react';
 
 function Register() {
