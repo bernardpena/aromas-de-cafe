@@ -10,6 +10,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { useState, createContext } from 'react';
 import UserProvider from './context/UserProvider';
 import Footer from './components/Footer';
+import './App.css';
 
 export const UserContext = createContext();
 

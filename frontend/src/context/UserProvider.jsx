@@ -7,12 +7,12 @@ const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const login = (userData) => {
-        // Lógica para iniciar sesión
+    
         setUser(userData);
     };
 
     const logout = () => {
-        // Lógica para cerrar sesión
+    
         setUser(null);
     };
 

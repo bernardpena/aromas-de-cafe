@@ -41,6 +41,7 @@
   color: #888;
 } */
 
+/* bernardo*/
 * {
   box-sizing: border-box;
 }
@@ -55,6 +56,14 @@ body {
   max-width: 100%;
   margin: 0 auto; 
   padding: 10px; 
+
+ /* main */ 
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: "Sour Gummy", "Roboto", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
 }
 
 nav{
@@ -73,6 +82,7 @@ nav{
   overflow: hidden;
 }
 
+/* bernardo */
 .carousel-container {
   max-width: 100%;
   overflow: hidden; 
@@ -83,6 +93,17 @@ nav{
   width: 100%; 
   height: auto; 
   max-height: 600px; 
+  
+.carousel-image {
+  width: 100%; 
+  height: auto; 
+  max-height: 100%;
+  
+ /* main */ 
+ .logo {
+  height: 50px;
+}
+  
   object-fit: cover; 
   object-position: bottom;
   transform: scale(1, 0.8);
