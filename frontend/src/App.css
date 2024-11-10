@@ -41,8 +41,29 @@
   color: #888;
 } */
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0; 
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto; 
+  padding: 10px; 
+}
+
 nav{
   background-color: saddlebrown;
+}
+
+.navbar {
+  margin-bottom: 0; 
+  padding: 0.5rem 1rem; 
 }
 
 .carousel {
@@ -52,11 +73,17 @@ nav{
   overflow: hidden;
 }
 
+.carousel-container {
+  max-width: 100%;
+  overflow: hidden; 
+  margin-top: -10px; 
+}
+
 .carousel-image {
-  width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
-  height: auto; /* Mantiene la proporción de la imagen */
-  max-height: 100%;
-  object-fit: cover; /* Cubre todo el espacio sin distorsionar la imagen */
+  width: 100%; 
+  height: auto; 
+  max-height: 600px; 
+  object-fit: cover; 
   object-position: bottom;
   transform: scale(1, 0.8);
 }
@@ -70,6 +97,24 @@ body{
   background-color: beige;
 }
 
+/* card*/
+.container {
+  max-width: 1200px; 
+  margin: auto; 
+  overflow: hidden;
+}
+
+.card {
+  transition: transform 0.2s; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
+  margin: 0.5rem auto; 
+  /* width: 100%;  */
+  max-width: 400px; 
+}
+
+.card:hover {
+  transform: translateY(-3px); 
+}
 
 /* Footer */
 .colorFondo {
