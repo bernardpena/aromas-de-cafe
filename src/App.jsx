@@ -5,20 +5,20 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Cart from './components/Cart';
 import Header from './components/Header';
+import Footer from './components/Footer';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useState, createContext } from 'react';
 import UserProvider from './context/UserProvider';
-import Footer from './components/Footer';
-import './App.css';
-
-export const UserContext = createContext();
 
 import './App.css';
 import '../src/assets/navbar.css';
 import '../src/assets/carousel.css';
 import '../src/assets/card.css';
 import '../src/assets/footer.css';
+
+export const UserContext = createContext();
 
 function App() {
 
