@@ -1,3 +1,7 @@
+.container {
+  background-color: #E5C7A6;
+}
+
 
 .container .card{
     display: flex;
@@ -20,10 +24,6 @@
       /* transition: transform 0.3s ease; */
     }
     
-    .card img:hover {
-      /* transform: scale(1.1);  */
-    }
-    
     .card:hover {
       transform: translateY(-4px); 
       transform: scale(1.03);
@@ -32,4 +32,8 @@
     .add-button{
       background-color: rgb(133, 113, 54);
       color: white;
+    }
+
+    .button:focus, button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
     }

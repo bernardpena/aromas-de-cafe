@@ -1,0 +1,31 @@
+.container {
+    background-color: #f8f9fa; 
+    border-radius: 8px;
+    max-width: 80%; 
+    margin: auto;
+  }
+  
+  h2 {
+    color: #007bff; 
+  }
+  
+  input.form-control {
+    border-radius: 5px; 
+  }
+  
+  .btn {
+    background-color: #28a745; 
+    border: none;
+    font-weight: bold; 
+  }
+  
+  .btn:hover {
+    background-color: #218838; 
+  }
+
+  form {
+    padding: 20px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    width: 100%;
+}

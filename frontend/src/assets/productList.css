@@ -1,0 +1,13 @@
+.container {
+    background-color: #E5C7A6;
+    max-width: 70%;
+}
+
+.col-md-4 {
+    margin-bottom: 10px;
+}
+
+.card {
+    margin-bottom: 10px;
+}
+

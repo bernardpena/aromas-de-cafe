@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from '../components/Login';
+import '../assets/navbar.css';
 
 function Navbar() {
   const [modalOpen, setModalOpen] = useState(false);
