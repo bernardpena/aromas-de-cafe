@@ -2,12 +2,12 @@
 .container .card{
     display: flex;
     justify-content: center;
+    margin-top: 10px;
     }
-  
   
     .card {
       transition: transform 0.2s; 
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); 
       margin: 0.5rem auto; 
       /* width: 100%;  */
       max-width: 400px;
@@ -15,16 +15,18 @@
     }
     
     .card img{
-      border-radius: 20px;
-      transition: transform 0.3s ease;
+      border-radius: 10px;
+      width: 100%;
+      /* transition: transform 0.3s ease; */
     }
     
     .card img:hover {
-      transform: scale(1.1); 
+      /* transform: scale(1.1);  */
     }
     
     .card:hover {
-      transform: translateY(-3px); 
+      transform: translateY(-4px); 
+      transform: scale(1.03);
     }
     
     .add-button{
