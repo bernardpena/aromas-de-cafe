@@ -19,6 +19,7 @@ import '../src/assets/navbar.css';
 import '../src/assets/carousel.css';
 import '../src/assets/card.css';
 import '../src/assets/footer.css';
+import '../src/assets/login.css';
 
 function App() {
 
