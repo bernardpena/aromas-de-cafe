@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import products from '../data';
 import { UserContext } from '../App.jsx';
+import '../assets/card.css'
 
 function ProductList() {
   const user = useContext(UserContext);
@@ -33,7 +34,7 @@ function ProductList() {
     <div className="container mt-5">
       <h3 className="text-center"> {`Hola ${user?.name || 'Invitado'}!`}</h3>
       {/* <h3 className="text-center"> {`Hola ${user.name || 'Invitado'}!`}</h3> */}
-      <h2 className="text-center">Nuestros Cafés</h2>
+      <h2 className="text-center titulo">Nuestros Cafés</h2>
       <div className="row mt-4">
         {products.map(product => (
           <div className="col-md-4 mb-4" key={product.id}>
@@ -60,3 +61,4 @@ function ProductList() {
 }
 
 export default ProductList;
+

@@ -25,6 +25,12 @@ const Carousel = () => {
                 <div>
                     <img src="../../public/header3.jpg" alt="Café 3" className="carousel-image" />
                 </div>
+                <div>
+                    <img src="../../public/header4.jpg" alt="Café 3" className="carousel-image" />
+                </div>
+                <div>
+                    <img src="../../public/header5.jpg" alt="Café 3" className="carousel-image" />
+                </div>
 
             </Slider>
         </div>

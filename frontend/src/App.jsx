@@ -14,6 +14,12 @@ import './App.css';
 
 export const UserContext = createContext();
 
+import './App.css';
+import '../src/assets/navbar.css';
+import '../src/assets/carousel.css';
+import '../src/assets/card.css';
+import '../src/assets/footer.css';
+
 function App() {
 
   const [user, setUser] = useState("Usuario");

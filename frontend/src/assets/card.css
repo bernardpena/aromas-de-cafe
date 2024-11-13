@@ -1,0 +1,33 @@
+
+.container .card{
+    display: flex;
+    justify-content: center;
+    }
+  
+  
+    .card {
+      transition: transform 0.2s; 
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
+      margin: 0.5rem auto; 
+      /* width: 100%;  */
+      max-width: 400px;
+      border-radius: 20px;
+    }
+    
+    .card img{
+      border-radius: 20px;
+      transition: transform 0.3s ease;
+    }
+    
+    .card img:hover {
+      transform: scale(1.1); 
+    }
+    
+    .card:hover {
+      transform: translateY(-3px); 
+    }
+    
+    .add-button{
+      background-color: rgb(133, 113, 54);
+      color: white;
+    }
