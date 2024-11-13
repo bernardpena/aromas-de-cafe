@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import products from '../data';
 import { UserContext } from '../App.jsx';
-import '../assets/card.css'
+import '../assets/productList.css'
 
 function ProductList() {
   const user = useContext(UserContext);

@@ -1,4 +1,8 @@
 /* Footer */
-.colorFondo {
+.container{
+  max-width: 100%; 
+}
+
+.colorFondo .container {
     background-color: saddlebrown;
   }
