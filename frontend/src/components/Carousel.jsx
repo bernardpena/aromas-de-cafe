@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import '../assets/carousel.css';
+import '../assets/css/carousel.css';
 
 const images = [
     { src: '/header.jpg', alt: 'Café 1' },

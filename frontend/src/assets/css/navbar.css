@@ -18,3 +18,13 @@
   .logo {
     height: 50px;
   }
+
+  .navbar ul li a:hover {
+    text-decoration: underline; 
+}
+
+.navbar li a .fa-sign-in-alt,
+.navbar li a .fa-user-plus,
+.navbar li a .fa-shopping-cart {
+    margin-right: 5px; 
+}
