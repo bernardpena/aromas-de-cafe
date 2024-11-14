@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App.jsx';
+import '../assets/css/login.css';
+
+function Login({ onClose }) {
+  const user = useContext(UserContext);
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
+
+=======
 // frontend/src/components/Login.jsx
 
 import { useState, useContext } from 'react';
@@ -14,6 +26,7 @@ function Login() {
   const navigate = useNavigate();
 
 
+>>>>>>> e4e40319e1243002971e8b885b59829560a6ce4d
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -30,6 +43,10 @@ function Login() {
       if (response.ok) {
         alert('Inicio de sesión exitoso');
         navigate('/');
+<<<<<<< HEAD
+        onClose();
+=======
+>>>>>>> e4e40319e1243002971e8b885b59829560a6ce4d
       } else {
         const errorText = await response.text();
         alert(errorText || 'Credenciales inválidas');
@@ -42,7 +59,11 @@ function Login() {
 
   return (
     <div className="container mt-5">
+<<<<<<< HEAD
+      <h3 className='text-center'>{`Hola`}</h3>
+=======
       <h3 className='text-center'>{`Hola ${user}`}</h3>
+>>>>>>> e4e40319e1243002971e8b885b59829560a6ce4d
       <h2 className="text-center">Inicio de Sesión</h2>
       <form onSubmit={handleSubmit} className="mt-4">
         <div className="mb-3">
@@ -67,7 +88,11 @@ function Login() {
             required
           />
         </div>
+<<<<<<< HEAD
+        <button type="submit" className="btn add-button w-100">Entrar</button>
+=======
         <button type="submit" className="btn add-button w-100">Iniciar Sesión</button>
+>>>>>>> e4e40319e1243002971e8b885b59829560a6ce4d
       </form>
     </div>
   );

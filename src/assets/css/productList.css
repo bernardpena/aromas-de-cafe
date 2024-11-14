@@ -1,0 +1,46 @@
+.container {
+    margin-top: 0px;
+    padding: 20px; 
+}
+
+.titulo {
+    font-size: 2em; 
+    color: #333; 
+}
+
+/* Estilos para las cards */
+.card {
+    transition: transform 0.2s; 
+    border: 1px solid #ddd; 
+}
+
+.card:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+.add-button {
+    background-color: #007bff; 
+    color: white; 
+}
+
+.add-button:hover {
+    background-color: #0056b3; 
+}
+
+/* Ajustes responsivos */
+@media (max-width: 900px) {
+    .container {
+        margin-top: 10px; 
+    }
+    
+    
+    .titulo {
+        margin-top: 10px; 
+        font-size: 1.8em;
+        color: #333; 
+    }
+    .add-button {
+        width: 100%; 
+    }
+}
