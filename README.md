@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+Equipo 6:<br>
+Anakaren Lozano <br>
+Bernardo Peña <br>
+Lucas Cid
+
+>>>>>>> e4e40319e1243002971e8b885b59829560a6ce4d
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
