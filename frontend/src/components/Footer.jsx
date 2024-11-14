@@ -1,18 +1,18 @@
 import React from 'react';
-import '../assets/footer.css';
+import '../assets/css/footer.css';
 
 function Footer() {
     return (
-        <footer className="colorFondo text-light text-center py-4 ">
-            <div className="container">
+        <footer className="text-light text-center navbar-dark bg-dark py-4 ">
+            <div className="container navbar-dark bg-dark">
                 <p>&copy; 2024 Aromas de Café</p>
                 <p>Todos los derechos reservados.</p>
                 <ul className="list-inline">
                     <li className="list-inline-item">
-                        <a href="/privacy" className="text-light">Política de Privacidad</a>
+                        <a href="/politica-privacidad" className="text-light">Política de Privacidad</a>
                     </li>
                     <li className="list-inline-item">
-                        <a href="/terms" className="text-light">Términos de Servicio</a>
+                        <a href="/terminos-de-servicio" className="text-light">Términos de Servicio</a>
                     </li>
                 </ul>
             </div>

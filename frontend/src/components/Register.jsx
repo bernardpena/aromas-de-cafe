@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../assets/register.css';
+import '../assets/css/register.css';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ function Register() {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container registro mt-5">
       <h2 className="text-center mb-4">Registro</h2>
       <form onSubmit={handleSubmit} className="border p-4 rounded shadow-sm">
         <div className="mb-3">
