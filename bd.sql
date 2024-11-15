@@ -6,10 +6,11 @@ CREATE DATABASE aromas_de_cafe;
 CREATE TABLE usuarios (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL,
+  pass VARCHAR(255) NOT NULL,
   calle VARCHAR(255),
   ciudad VARCHAR(255),
-  comuna VARCHAR(255)
+  comuna VARCHAR(255),
+  rol VARCHAR(255),
 );
 
 -- Tabla de productos (cafés)
@@ -27,6 +28,11 @@ CREATE TABLE carrito (
   producto_id INTEGER REFERENCES productos(id),
   cantidad INTEGER DEFAULT 1
 );
+
+--anakaren
+INSERT INTO usuarios (id, nombre, pass, calle, ciudad, comuna, rol) VALUES 
+('1', 'admin@gmail.com', 'Admin', 'jdksfhalkf', 'kdsfjhkljf', 'sdfssagf', 'Administrador'),
+--
 
 INSERT INTO productos (nombre, descripcion, precio) VALUES 
 ('Café Arábica', 'Un café suave y aromático con notas de frutas.', 3.99),
