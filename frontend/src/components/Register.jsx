@@ -3,8 +3,9 @@ import '../assets/css/register.css';
 
 function Register() {
   const [formData, setFormData] = useState({
+    nombre: '',
     email: '',
-    password: '',
+    pass: '',
     calle: '',
     ciudad: '',
     comuna: ''
@@ -33,11 +34,14 @@ function Register() {
     <div className="container registro mt-5">
       <h2 className="text-center mb-4">Registro</h2>
       <form onSubmit={handleSubmit} className="border p-4 rounded shadow-sm">
+      <div className="mb-3">
+          <input type="text" name="name" className="form-control" placeholder="Nombre" onChange={handleChange} required />
+        </div>
         <div className="mb-3">
           <input type="email" name="email" className="form-control" placeholder="Email" onChange={handleChange} required />
         </div>
         <div className="mb-3">
-          <input type="password" name="password" className="form-control" placeholder="Contraseña" onChange={handleChange} required />
+          <input type="password" name="pass" className="form-control" placeholder="Contraseña" onChange={handleChange} required />
         </div>
         <div className="mb-3">
           <input type="text" name="calle" className="form-control" placeholder="Calle" onChange={handleChange} required />
