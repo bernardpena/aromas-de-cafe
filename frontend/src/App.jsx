@@ -42,13 +42,14 @@ function App() {
               <>
                 <Header />
                 <ProductList />
+                <Footer />
               </>
             } />
             <Route path="/register" element={<Register />} />
             <Route path="/cart" element={<Cart onRequestLogin={handleOpenLogin} />} />
             <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
             <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
-            <Footer />
+
           </Routes>
 
 
