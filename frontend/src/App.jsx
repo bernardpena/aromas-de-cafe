@@ -51,9 +51,24 @@ function App() {
                 <Footer />
               </>
             } />
-            <Route path="/cart" element={<Cart onRequestLogin={handleOpenLogin} />} />
-            <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
-            <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
+            <Route path="/cart" element={
+              <>
+                <Cart onRequestLogin={handleOpenLogin} />
+                <Footer />
+              </>
+              } />
+            <Route path="/politica-privacidad" element={
+             <>
+                <PoliticaPrivacidad />
+                <Footer />
+              </>
+              } />
+            <Route path="/terminos-de-servicio" element={
+              <>
+                <TerminosDeServicio />
+                <Footer />
+              </>
+              } />
           </Routes>
 
 
