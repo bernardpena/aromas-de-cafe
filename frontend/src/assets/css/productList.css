@@ -1,6 +1,7 @@
-.container {
+.product{
     background-color: #E5C7A6;
     max-width: 60%;
+    box-shadow: none;
 }
 
 .col-md-3 {

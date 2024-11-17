@@ -12,7 +12,7 @@ function ProductList() {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container product mt-5">
       <h2 className="text-center titulo">Nuestros Cafés</h2>
       <div className="row mt-4">
         {products.map(product => (
