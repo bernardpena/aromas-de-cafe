@@ -1,0 +1,30 @@
+.container {
+    max-width: 100%;
+    margin: 0 auto; 
+    padding: -20px; 
+  }
+  
+  nav {
+    background-color: saddlebrown;
+    /* background-color: #E5C7A6; */
+  }
+  
+  nav .navbar {
+    margin-bottom: 0; 
+    padding: 0.5rem 1rem;
+    padding-bottom: 10px;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+
+  .navbar ul li a:hover {
+    text-decoration: underline; 
+}
+
+.navbar li a .fa-sign-in-alt,
+.navbar li a .fa-user-plus,
+.navbar li a .fa-shopping-cart {
+    margin-right: 5px; 
+}
