@@ -14,6 +14,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 
+// error 404
+app.use((req, res) => {
+  res.status(404).json({ error: "Ruta no encontrada" });
+});
+
 // Middleware de manejo de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -29,7 +34,7 @@ db.connect((err) => {
 });
 
 // iniciar Servidor
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Servidor en ejecución en http://localhost:${PORT}`);
+  console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });
