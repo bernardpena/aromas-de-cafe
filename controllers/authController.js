@@ -3,18 +3,27 @@ const bcrypt = require("bcryptjs");
 
 exports.register = async (req, res) => {
   try {
-    const { nombre, email, password, calle, ciudad, comuna, rol } = req.body;
+    const {
+      nombre,
+      email,
+      password,
+      calle,
+      ciudad,
+      comuna,
+      rol = "usuario",
+    } = req.body; // Asignar rol por defecto
 
-    // Verificar si el email está en uso
+    //verifica email
     const existingUser = await pool.query(
       "SELECT * FROM usuarios WHERE email = $1",
       [email]
     );
     if (existingUser.rows.length > 0) {
-      return res.status(409).send("Email ya está en uso");
+      return res.status(409).send("El email ya está en uso");
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10); // Hasear la contraseña
+    // Hasear la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Inserción en la base de datos
     await pool.query(
@@ -22,10 +31,10 @@ exports.register = async (req, res) => {
       [nombre, email, hashedPassword, calle, ciudad, comuna, rol]
     );
 
-    res.sendStatus(201);
+    res.status(201).send("Registro exitoso");
   } catch (error) {
     console.error("Error en registro:", error);
-    res.status(500).send("Error en el registro");
+    res.status(500).send("Error al registrar el usuario");
   }
 };
 
@@ -41,12 +50,12 @@ exports.login = async (req, res) => {
       user.rows.length > 0 &&
       (await bcrypt.compare(password, user.rows[0].password))
     ) {
-      res.sendStatus(200);
+      res.status(200).send("Inicio de sesión exitoso");
     } else {
       res.status(401).send("Credenciales inválidas");
     }
   } catch (error) {
     console.error("Error en login:", error);
-    res.status(500).send("Error en el login");
+    res.status(500).send("Error al iniciar sesión");
   }
 };

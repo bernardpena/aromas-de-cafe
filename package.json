@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 28acc8e702435464962e13cc330d00be9c71a55d
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
@@ -19,42 +15,5 @@
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1"
-<<<<<<< HEAD
-=======
-=======
-  "name": "frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "bootstrap": "^5.3.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0",
-    "react-slick": "^0.30.2",
-    "slick-carousel": "^1.8.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.13.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
-    "eslint": "^9.13.0",
-    "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.14",
-    "globals": "^15.11.0",
-    "vite": "^5.4.10"
->>>>>>> 30b810c91491bb168e18cd6de584fbd4b36ed931
->>>>>>> 28acc8e702435464962e13cc330d00be9c71a55d
   }
 }
