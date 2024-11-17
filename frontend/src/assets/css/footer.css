@@ -9,4 +9,5 @@ footer {
 
 .colorFondo .container {
     background-color: saddlebrown;
+    box-shadow: none;
   }
