@@ -20,6 +20,10 @@
   max-width: 500px; 
 }
 
+.modal-box{
+  background-color: saddlebrown;
+}
+
 .close {
   color: #aaa;
   float: right;
