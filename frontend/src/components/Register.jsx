@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../assets/css/register.css';
+import Modal from './Modal';
 
 const Register = () => {
   const [nombre, setNombre] = useState('');
@@ -8,6 +9,8 @@ const Register = () => {
   const [calle, setCalle] = useState('');
   const [ciudad, setCiudad] = useState('');
   const [comuna, setComuna] = useState('');
+  const [error, setError] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +39,10 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Evitar que el formulario se envíe de la manera tradicional
+    e.preventDefault();
+    setError('');
+    setModalOpen(false);
+
     try {
       const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
@@ -49,27 +55,40 @@ const Register = () => {
           password,
           calle,
           ciudad,
-          comuna
+          comuna,
         }),
       });
 
-      // Verificar la respuesta
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Error en el registro:', errorText);
-        throw new Error('Error en el registro');
-      }
 
-      const data = await response.json();
-      console.log(data);
+        // Manejar el mensaje de error 
+        if (response.status === 409) { // 409 
+          setError('El email ya está en uso');
+        } else {
+          setError('Ocurrió un error al registrar el usuario');
+        }
+        setModalOpen(true);
+      } else {
+        const data = await response.json();
+        console.log(data);
+      }
     } catch (error) {
       console.error('Error al registrar:', error);
+      setError('Ha ocurrido un error al registrar.');
+      setModalOpen(true);
     }
   };
 
   return (
     <div className="container registro mt-5 my-5">
       <h2 className="text-center mb-2">Registro</h2>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        message={error}
+      /> {/* Componente Modal */}
       <form onSubmit={handleSubmit} className="p-4 rounded">
         <div className="mb-3">
           <input
