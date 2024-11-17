@@ -1,7 +1,7 @@
 .registro{
     background-color: saddlebrown !important; 
     border-radius: 8px;
-    width: 80% !important; 
+    max-width: 800px !important; 
     margin: auto;
   }
   

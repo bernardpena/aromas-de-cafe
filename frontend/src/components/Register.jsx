@@ -33,7 +33,7 @@ function Register() {
   return (
     <div className="container registro mt-5 my-5">
       <h2 className="text-center mb-4">Registro</h2>
-      <form onSubmit={handleSubmit} className="border p-4 rounded shadow-sm">
+      <form onSubmit={handleSubmit} className=" p-4 rounded shadow-sm">
       <div className="mb-3">
           <input type="text" name="name" className="form-control" placeholder="Nombre" onChange={handleChange} required />
         </div>
