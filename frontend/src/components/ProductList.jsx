@@ -1,10 +1,25 @@
-import { useContext } from 'react';
-import products from '../data';
+import React, { useEffect, useState, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import '../assets/css/productList.css';
 
 function ProductList() {
   const { addToCart } = useContext(CartContext);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/products');
+        const data = await response.json();
+        setProducts(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Error al obtener los productos:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -22,7 +37,7 @@ function ProductList() {
               <div className="card-body">
                 <h5 className="card-title">{product.nombre}</h5>
                 <p className="card-text">{product.descripcion}</p>
-                <p className="card-text">${product.precio.toFixed(2)}</p>
+                <p className="card-text">${product.precio}</p>
                 <button
                   className="btn add-button"
                   onClick={() => handleAddToCart(product)}
