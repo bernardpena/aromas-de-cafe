@@ -7,8 +7,6 @@ const db = require("./config/db");
 
 const app = express();
 app.use(express.json());
-
-// Middleware
 app.use(cors());
 
 // Rutas
@@ -16,11 +14,27 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 
-// Connect to the database
-db.connect();
+// error 404
+app.use((req, res) => {
+  res.status(404).json({ error: "Ruta no encontrada" });
+});
 
-// Start the server
-const PORT = 5000;
+// Middleware de manejo de errores
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Algo salió mal!");
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error("Error al conectar a la base de datos:", err);
+    process.exit(1);
+  }
+  console.log("Conexión a la base de datos establecida correctamente.");
+});
+
+// iniciar Servidor
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Servidor en ejecución en http://localhost:${PORT}`);
+  console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });

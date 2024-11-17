@@ -1,25 +1,11 @@
-const { Pool } = require("pg");
+const pool = require("../config/db");
 
-//instancia del pool de conexiones
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "aromas_de_cafe",
-  password: "Admin",
-  port: 5432,
-});
-
-// obtener los productos
-const getProducts = async (req, res) => {
+exports.getProducts = async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM productos");
-    res.json(result.rows);
-  } catch (error) {
-    console.error("Error al obtener los productos:", error);
-    res.status(500).send("Error en el servidor");
+    const products = await pool.query("SELECT * FROM productos");
+    res.json(products.rows);
+  } catch (err) {
+    console.error("Error al obtener los productos:", err);
+    res.status(500).json({ error: "Error al obtener los productos" });
   }
-};
-
-module.exports = {
-  getProducts,
 };
