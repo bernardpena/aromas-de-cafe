@@ -37,7 +37,7 @@ function Login({ onClose }) {
 
   return (
     <div className="container modal-box mt-5">
-      <h3 className='text-center'>{`Hola`}</h3>
+      <h3 className='text-center text-light'>{`Hola`}</h3>
       <h2 className="text-center">Inicio de Sesión</h2>
       <form onSubmit={handleSubmit} className="mt-4">
         <div className="mb-3">
