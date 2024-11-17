@@ -3,8 +3,8 @@ import '../assets/css/footer.css';
 
 function Footer() {
     return (
-        <footer className="text-light text-center navbar-dark bg-dark py-4 ">
-            <div className="container navbar-dark bg-dark">
+        <footer className="text-light text-center navbar-dark colorFondo py-4 ">
+            <div className="container navbar-dark colorFondo">
                 <p>&copy; 2024 Aromas de Café</p>
                 <p>Todos los derechos reservados.</p>
                 <ul className="list-inline">
