@@ -1,0 +1,13 @@
+/* Footer */
+.container{
+  max-width: 100%; 
+}
+
+footer {
+  background-color: saddlebrown;
+}
+
+.colorFondo .container {
+    background-color: saddlebrown;
+    box-shadow: none;
+  }
