@@ -19,8 +19,14 @@ import Footer from './components/Footer';
 import './App.css';
 import './assets/css/card.css';
 import './assets/css/carousel.css';
+import './assets/css/cart.css';
+import './assets/css/footer.css';
+import './assets/css/login.css';
 import './assets/css/navbar.css';
+import './assets/css/PoliticaPrivacidad.css';
+import './assets/css/ProductList.css';
 import './assets/css/register.css';
+import './assets/css/TerminosDeServicio.css'
 
 export const UserContext = createContext();
 
