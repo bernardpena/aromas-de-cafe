@@ -1,5 +1,5 @@
 .registro{
-    background-color: saddlebrown; 
+    background-color: saddlebrown !important; 
     border-radius: 8px;
     width: 80% !important; 
     margin: auto;
