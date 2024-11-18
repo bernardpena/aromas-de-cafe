@@ -1,14 +1,13 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
-import { UserContext } from '../App.jsx';
+import { UserContext } from '../context/UserProvider';
 import '../assets/css/cart.css';
 import { useNavigate } from 'react-router-dom';
 
 function Cart({ onRequestLogin }) {
     const navigate = useNavigate();
     const { cart, removeFromCart } = useContext(CartContext);
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const handleCheckout = () => {
         if (cart.length === 0) {
@@ -22,7 +21,7 @@ function Cart({ onRequestLogin }) {
             alert('Continúas como invitado. Listo para el pago.');
             // lógica para proceder al pago como invitado
         } else {
-            //  inicia sesión, llamar a onRequestLogin
+            // inicia sesión, llamar a onRequestLogin
             onRequestLogin();
         }
     };
@@ -55,7 +54,7 @@ function Cart({ onRequestLogin }) {
                     </div>
                     <button
                         className="btn btn-primary"
-                        onClick={handleCheckout} // Maneja el pago
+                        onClick={handleCheckout}
                     >
                         Pagar
                     </button>
