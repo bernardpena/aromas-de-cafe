@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState, createContext } from 'react';
 import UserProvider from './context/UserProvider';
 import { CartProvider } from './context/CartContext';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
+// Importaciones de otros componentes
 import Navbar from '../src/components/Navbar';
 import ProductList from '../src/components/ProductList';
 import Register from '../src/components/Register';
@@ -17,72 +14,23 @@ import TerminosDeServicio from '../src/components/TerminosDeServicio';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 
-import './App.css';
-import './assets/css/card.css';
-import './assets/css/carousel.css';
-import './assets/css/cart.css';
-import './assets/css/footer.css';
-import './assets/css/login.css';
-import './assets/css/navbar.css';
-import './assets/css/PoliticaPrivacidad.css';
-import './assets/css/ProductList.css';
-import './assets/css/register.css';
-import './assets/css/TerminoDeServicio.css'
-
-export const UserContext = createContext();
-
 function App() {
-  const [user, setUser] = useState(null);
-  const [isLoginVisible, setLoginVisible] = useState(false);
+  const [isLoginVisible, setLoginVisible] = useState(false); // Estado para controlar la visibilidad del modal
 
   const handleOpenLogin = () => {
-    setLoginVisible(true);
+    setLoginVisible(true); // Abre el modal
   };
 
   const handleCloseLogin = () => {
-    setLoginVisible(false);
+    setLoginVisible(false); // Cierra el modal
   };
 
   return (
-    <UserProvider value={{ user, setUser }}>
+    <UserProvider>
       <CartProvider>
         <Router>
-          <Navbar onLoginClick={handleOpenLogin} />
-          <Routes>
-            <Route path="/" element={
-              <>
-                <Header />
-                <ProductList />
-                <Footer />
-              </>
-            } />
-            <Route path="/register" element={
-              <>
-                <Register />
-                <Footer />
-              </>
-            } />
-            <Route path="/cart" element={
-              <>
-                <Cart onRequestLogin={handleOpenLogin} />
-                <Footer />
-              </>
-            } />
-            <Route path="/politica-privacidad" element={
-              <>
-                <PoliticaPrivacidad />
-                <Footer />
-              </>
-            } />
-            <Route path="/terminos-de-servicio" element={
-              <>
-                <TerminosDeServicio />
-                <Footer />
-              </>
-            } />
-          </Routes>
-
-
+          <Navbar onLoginClick={handleOpenLogin} /> {/* Pasa la función al Navbar */}
+          <Header />
           {isLoginVisible && (
             <div className="modal" onClick={handleCloseLogin}>
               <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -91,6 +39,14 @@ function App() {
               </div>
             </div>
           )}
+          <Routes>
+            <Route path="/" element={<ProductList />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/cart" element={<Cart onRequestLogin={handleOpenLogin} />} />
+            <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
+            <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
+          </Routes>
+          <Footer />
         </Router>
       </CartProvider>
     </UserProvider>
