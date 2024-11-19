@@ -14,7 +14,7 @@ function Navbar({ onLoginClick }) {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img className="logo" src="../public/AromasdeCafe_LOGO.png" alt="Aromas de Café Logo" />
