@@ -1,17 +1,53 @@
 .carousel {
-    width: 100%;
-    max-width: 100%;
-    height: 550px;
-    margin-top: 1px;
-    margin-bottom: 50px;
-    overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  height: 550px;
+  margin-top: 1px;
+  margin-bottom: 50px;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.carousel-image {
+  width: 100%; 
+  height: auto; 
+  max-height: 550px;
+  object-fit: cover; 
+  object-position:center ;
+  margin: 0;
+  border-radius: 5px;
+}
+
+@media(max-width:1050px){
+  .carousel{
+    height: 460px;
   }
-  
-  .carousel-container {
-    display: flex;
-    justify-content: center;
-    height: 100%;
+}
+
+@media(max-width:900px){
+  .carousel{
+    height: 400px;
   }
+/* bernardo */
+}
+
+@media(max-width:650px){
+  .carousel{
+    height: 300px;
+  }
+}
+
+@media(max-width:450px){
+  .carousel{
+    height: 220px;
+  }
+}
+
   
   .carousel-image {
     width: 100%; 
@@ -46,3 +82,4 @@
       height: 220px;
     }
   }
+/* main */
