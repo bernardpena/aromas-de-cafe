@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
+import Swal from 'sweetalert2';
 
 const stripePromise = loadStripe('TU_PUBLIC_KEY_DE_STRIPE');
 
@@ -68,9 +69,19 @@ function Cart({ onRequestLogin }) {
         }
 
         if (!user) {
-            const confirmPaymentMethod = window.confirm('¿Deseas continuar como invitado? Pulsa "Aceptar" para continuar o "Cancelar" para iniciar sesión o registrarte.');
+            const { value: confirmPaymentMethod } = await Swal.fire({
+                title: 'Continuar como invitado',
+                text: '¿Deseas continuar como invitado? Puedes pulsar "Continuar" para seguir o "Inicio de sesión" para registrarte.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Continuar',
+                cancelButtonText: 'Inicio de sesión'
+            });
+        
             if (confirmPaymentMethod) {
-                alert('Continúas como invitado.');
+                Swal.fire('Continúas como invitado.', '', 'success');
                 await saveCartToDatabase();
             } else {
                 const loggedInUser = await onRequestLogin();

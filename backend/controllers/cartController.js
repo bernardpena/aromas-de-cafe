@@ -65,19 +65,22 @@ exports.saveCart = async (req, res) => {
   const { usuario_id, items } = req.body;
 
   if (!usuario_id || !items || items.length === 0) {
-    return res
-      .status(400)
-      .json({ error: "usuario_id y items son requeridos." });
+    return res.status(400).json({ error: "usuario_id y items son requeridos." });
   }
 
   try {
-    //  evitar duplicados
+    // Evitar duplicados
     await pool.query("DELETE FROM carrito WHERE usuario_id = $1", [usuario_id]);
 
     // Insertar nuevos ítems
     for (const item of items) {
-      const { producto_id, cantidad, email, descripcion, imagen, nombre } =
-        item;
+      const { producto_id, cantidad, email, descripcion, imagen, nombre } = item;
+
+      // Verificar valores
+      if (!producto_id || !cantidad || !email) { 
+        console.error('Error: item falta campos', { item });
+        continue; 
+      }
 
       await pool.query(
         "INSERT INTO carrito (usuario_id, producto_id, cantidad, email, descripcion, imagen, nombre) VALUES ($1, $2, $3, $4, $5, $6, $7)",
@@ -87,7 +90,7 @@ exports.saveCart = async (req, res) => {
 
     res.status(201).json({ message: "Carrito guardado exitosamente" });
   } catch (err) {
-    console.error(err);
+    console.error("Error al guardar el carrito:", err);
     res.status(500).json({ error: "Error al guardar el carrito" });
   }
 };

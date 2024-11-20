@@ -1,7 +1,9 @@
 .product{
+    
     background-color: #E5C7A6;
     max-width: 60% !important;
     box-shadow: none !important;
+    margin-top: 10px;
 }
 
 
@@ -12,4 +14,46 @@
 .card {
     margin-bottom: 10px;
 }
+.card-text {
+    height: 50px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    /* white-space: nowrap;  */
+}
 
+@media (max-width: 2048px) {
+    .col-md-3 {
+        flex: 1 1 calc(33.33% - 10px); 
+    }
+    .product{
+        max-width: 90% !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .col-md-3 {
+        flex: 1 1 calc(33.33% - 10px); 
+    }
+    .product{
+        max-width: 90% !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .col-md-3 {
+        flex: 1 1 calc(50% - 10px); 
+    }
+    .product{
+        max-width: 90% !important;
+    }
+}
+
+@media (max-width: 500px) {
+    .col-md-3 {
+        flex: 1 1 100%; 
+    }
+    .product{
+        max-width: 90% !important;
+        margin-top: 5px;
+    }
+}
