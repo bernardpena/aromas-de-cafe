@@ -9,7 +9,7 @@ function ProductList() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/products');
+                const response = await fetch('http://localhost:5001/api/products');
                 const data = await response.json();
                 setProducts(data);
                 console.log(data);
@@ -37,7 +37,7 @@ function ProductList() {
                             <div className="card-body d-flex flex-column flex-grow-1"> 
                                 <h5 className="card-title">{product.nombre}</h5>
                                 <p className="card-text">{product.descripcion}</p>
-                                <p className="card-text">${product.precio}</p>
+                                <p className="card-text price">${product.precio}</p>
                                 <button
                                     className="btn add-button mt-auto"
                                     onClick={() => handleAddToCart(product)}
