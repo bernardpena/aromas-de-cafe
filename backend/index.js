@@ -7,7 +7,7 @@ const app = express();
 const cors = require("cors");
 const { getEventos, deleteEvento } = require("./consultas");
 
-app.listen(5000, console.log("SERVER ON"));
+app.listen(5001, console.log("SERVER ON"));
 app.use(cors());
 app.use(express.json());
 

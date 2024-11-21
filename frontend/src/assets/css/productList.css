@@ -1,7 +1,9 @@
 .product{
+    
     background-color: #E5C7A6;
     max-width: 60% !important;
     box-shadow: none !important;
+    margin-top: 10px;
 }
 
 
@@ -12,4 +14,82 @@
 .card {
     margin-bottom: 10px;
 }
+.card-text {
+    height: 50px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    /* white-space: nowrap;  */
+}
 
+.price {
+    background-color: #f8f9fa; 
+    /* border: 1px solid #d9534f;  */
+    border-radius: 5px;        
+    padding: 2px;              
+    color: #d9534f;           
+    font-weight: bold;         
+    font-size: 1.2em;          
+    margin-top: auto;          
+    transition: transform 0.3s, box-shadow 0.3s; 
+}
+
+
+.card:hover .price {
+    transform: scale(1.05);    
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3); 
+    color: #d9534f;
+}
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.price {
+    animation: pulse 2s infinite; 
+}
+
+@media (max-width: 2048px) {
+    .col-md-3 {
+        flex: 1 1 calc(33.33% - 10px); 
+    }
+    .product{
+        max-width: 90% !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .col-md-3 {
+        flex: 1 1 calc(33.33% - 10px); 
+    }
+    .product{
+        max-width: 90% !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .col-md-3 {
+        flex: 1 1 calc(50% - 10px); 
+    }
+    .product{
+        max-width: 90% !important;
+    }
+}
+
+@media (max-width: 500px) {
+    .col-md-3 {
+        flex: 1 1 100%; 
+    }
+    .product{
+        max-width: 90% !important;
+        margin-top: 5px;
+    }
+}

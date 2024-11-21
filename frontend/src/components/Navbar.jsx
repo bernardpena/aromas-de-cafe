@@ -4,9 +4,13 @@ import '../assets/css/navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faSignInAlt, faUserPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserProvider';
+import { CartContext } from '../context/CartContext'; 
 
 function Navbar({ onLoginClick }) {
   const { user, setUser } = useContext(UserContext);
+  const { cart } = useContext(CartContext);
+  
+  const itemCount = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -27,24 +31,35 @@ function Navbar({ onLoginClick }) {
             {user ? (
               <>
                 <li className="nav-item">
-                  <span className="nav-link">Hola, {user.nombre}</span>
+                  <span className="nav-link user-greeting">Hola, {user.nombre}</span>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Cerrar Sesión</a>
+                  <a className="nav-link" href="#" onClick={handleLogout}>
+                    <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar Sesión
+                  </a>
                 </li>
               </>
             ) : (
               <>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/register"><FontAwesomeIcon icon={faUserPlus} /> Registro</Link>
+                  <Link className="nav-link" to="/register">
+                    <FontAwesomeIcon icon={faUserPlus} /> Registro
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#" onClick={onLoginClick}><FontAwesomeIcon icon={faSignInAlt} /> Iniciar Sesión</a>
+                  <a className="nav-link" href="#" onClick={onLoginClick}>
+                    <FontAwesomeIcon icon={faSignInAlt} /> Iniciar Sesión
+                  </a>
                 </li>
               </>
             )}
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart"><FontAwesomeIcon icon={faShoppingCart} /> Carrito</Link>
+            <li className="nav-item d-flex align-items-center">
+              <Link className="nav-link position-relative" to="/cart">
+                {itemCount > 0 && (
+                  <span className="item-count">{itemCount}</span>
+                )}
+                <FontAwesomeIcon icon={faShoppingCart} /> Carrito
+              </Link>
             </li>
           </ul>
         </div>

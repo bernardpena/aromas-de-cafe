@@ -3,89 +3,152 @@ import { CartContext } from '../context/CartContext';
 import { UserContext } from '../context/UserProvider';
 import '../assets/css/cart.css';
 import { useNavigate } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from './CheckoutForm';
-
-const stripePromise = loadStripe('TU_PUBLIC_KEY_DE_STRIPE');
+import Swal from 'sweetalert2';
 
 function Cart({ onRequestLogin }) {
     const navigate = useNavigate();
-    const { cart, removeFromCart } = useContext(CartContext);
+    const { cart, removeFromCart, clearCart } = useContext(CartContext);
     const { user } = useContext(UserContext);
+    
+    const itemCount = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
-    const saveCartToDatabase = async () => {
-        if (!user) return;
-
-        console.log('Usuario:', user);
-        console.log('Datos a enviar:', {
-            usuario_id: user.id,
-            items: cart.map(item => ({
-                producto_id: item.id,
-                cantidad: item.cantidad,
-                email: user.email,
-                descripcion: item.descripcion,
-                imagen: item.imagen,
-                nombre: item.nombre,
-            })),
-        });
-
-        const response = await fetch('http://localhost:5000/api/cart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`
-            },
-            body: JSON.stringify({
+    const saveCartToDatabase = async (direccion, isGuest) => {
+        const payload = isGuest
+            ? {
+                invitado: {
+                    nombre_completo: direccion.nombre,
+                    email: direccion.correo,
+                    telefono: direccion.telefono,
+                    calle: direccion.calle,
+                    numero: direccion.numero,
+                    ciudad: direccion.ciudad,
+                },
+                items: cart.map(item => ({
+                    producto: item.nombre,
+                    cantidad: item.cantidad,
+                    valor: item.precio * item.cantidad
+                }))
+            }
+            : {
                 usuario_id: user.id,
                 items: cart.map(item => ({
                     producto_id: item.id,
                     cantidad: item.cantidad,
-                    email: user.email,
                     descripcion: item.descripcion,
                     imagen: item.imagen,
                     nombre: item.nombre,
-                })),
-            }),
+                }))
+            };
+    
+        console.log("Payload enviado:", JSON.stringify(payload)); 
+    
+        const response = await fetch('http://localhost:5001/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': user ? `Bearer ${user.token}` : undefined
+            },
+            body: JSON.stringify(payload),
         });
-
-        console.log('Response Status:', response.status);
-
+    
         if (response.ok) {
             const responseData = await response.json();
             console.log('Carrito guardado exitosamente:', responseData);
+            return true; 
         } else {
-            const errorData = await response.text();
+            const errorData = await response.json(); 
             console.error('Error al guardar el carrito:', errorData);
+            return false; 
         }
     };
 
-    // Manejo del proceso de checkout
     const handleCheckout = async () => {
         if (cart.length === 0) {
             alert('Tu carrito está vacío. Agrega productos antes de proceder al pago.');
             return;
         }
-
+    
         if (!user) {
-            const confirmPaymentMethod = window.confirm('¿Deseas continuar como invitado? Pulsa "Aceptar" para continuar o "Cancelar" para iniciar sesión o registrarte.');
+            const { value: confirmPaymentMethod } = await Swal.fire({
+                title: 'Continuar como invitado',
+                text: '¿Deseas continuar como invitado?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Continuar',
+                cancelButtonText: 'Inicio de sesión'
+            });
+    
             if (confirmPaymentMethod) {
-                alert('Continúas como invitado.');
-                await saveCartToDatabase();
+                // Solicitar datos
+                const { value: formValues = {} } = await Swal.fire({
+                    title: 'Datos de Envío',
+                    html: `
+                        <input id="nombre" class="swal2-input" placeholder="Nombre Completo">
+                        <input id="correo" class="swal2-input" placeholder="Correo Electrónico">
+                        <input id="telefono" class="swal2-input" placeholder="Teléfono">
+                        <input id="calle" class="swal2-input" placeholder="Calle">
+                        <input id="numero" class="swal2-input" placeholder="Número">
+                        <input id="ciudad" class="swal2-input" placeholder="Ciudad">
+                    `,
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        return {
+                            nombre: document.getElementById('nombre').value,
+                            correo: document.getElementById('correo').value,
+                            telefono: document.getElementById('telefono').value,
+                            calle: document.getElementById('calle').value,
+                            numero: document.getElementById('numero').value,
+                            ciudad: document.getElementById('ciudad').value,
+                        };
+                    }
+                });
+    
+                if (formValues) {
+                    const saved = await saveCartToDatabase(formValues, true); 
+                    if (saved) {
+                        Swal.fire(
+                            '¡Éxito!',
+                            'Productos pagados satisfactoriamente! Estamos preparando su pedido para que llegue lo más pronto posible.',
+                            'success'
+                        );
+                        clearCart(); 
+                    }
+                }
             } else {
                 const loggedInUser = await onRequestLogin();
                 if (loggedInUser) {
-                    await saveCartToDatabase();
+                    const saved = await saveCartToDatabase(); 
+                    if (saved) {
+                        Swal.fire(
+                            '¡Éxito!',
+                            'Productos pagados satisfactoriamente! Estamos preparando su pedido para que llegue lo más pronto posible.',
+                            'success'
+                        );
+                        clearCart();
+                    }
                 }
             }
         } else {
-            await saveCartToDatabase();
+            
+            const saved = await saveCartToDatabase(); 
+            if (saved) {
+                Swal.fire(
+                    '¡Éxito!',
+                    'Productos pagados satisfactoriamente! Estamos preparando su pedido para que llegue lo más pronto posible.',
+                    'success'
+                );
+                clearCart(); 
+            }
         }
     };
-
+    
     return (
         <div className="container">
             <h2>Carrito</h2>
+            <div className="cart-icon">
+                <span role="img" aria-label="carrito">🛒</span>
+                {itemCount > 0 && <span className="item-count">{itemCount}</span>}
+            </div>
             {cart.length === 0 ? (
                 <p>No tienes productos en tu carrito.</p>
             ) : (
@@ -116,12 +179,6 @@ function Cart({ onRequestLogin }) {
                     >
                         Pagar
                     </button>
-
-                    {user && (
-                        <Elements stripe={stripePromise}>
-                            <CheckoutForm cart={cart} />
-                        </Elements>
-                    )}
                 </div>
             )}
         </div>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserProvider from './context/UserProvider';
 import { CartProvider } from './context/CartContext';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Importaciones de otros componentes
 import Navbar from '../src/components/Navbar';
@@ -12,6 +14,7 @@ import Login from '../src/components/Login';
 import PoliticaPrivacidad from '../src/components/PoliticaPrivacidad';
 import TerminosDeServicio from '../src/components/TerminosDeServicio';
 import Header from '../src/components/Header';
+import Carousel from "./components/Carousel";
 import Footer from '../src/components/Footer';
 
 function App() {
@@ -22,14 +25,14 @@ function App() {
   };
 
   const handleCloseLogin = () => {
-    setLoginVisible(false); // Cierra el modal
+    setLoginVisible(false); 
   };
 
   return (
     <UserProvider>
       <CartProvider>
         <Router>
-          <Navbar onLoginClick={handleOpenLogin} /> {/* Pasa la función al Navbar */}
+          <Navbar onLoginClick={handleOpenLogin} /> 
           <Header />
           {isLoginVisible && (
             <div className="modal" onClick={handleCloseLogin}>
