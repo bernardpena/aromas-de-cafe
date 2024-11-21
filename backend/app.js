@@ -9,25 +9,24 @@ const db = require("./config/db");
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 app.use(bodyParser.json());
 
 // Rutas
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
-app.use("/api", cartRoutes);
-// app.use("/api/cart", cartRoutes);
+app.use("/api", cartRoutes); 
 
 // error 404
 app.use((req, res) => {
   res.status(404).json({ error: "Ruta no encontrada" });
 });
 
-// Middleware de manejo de errores
+// Middleware 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Algo salió mal!");
 });
+
 
 db.connect((err) => {
   if (err) {
@@ -37,7 +36,7 @@ db.connect((err) => {
   console.log("Conexión a la base de datos establecida correctamente.");
 });
 
-// iniciar Servidor
+
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en el puerto ${PORT}`);

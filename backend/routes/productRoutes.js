@@ -8,7 +8,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/", productController.getProducts);
 
-// Middleware de manejo de errores (opcional)
+// Middleware
 router.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Algo salió mal en la autenticación!");

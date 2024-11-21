@@ -83,3 +83,50 @@ INSERT INTO public.usuarios (id, email, password, calle, ciudad, comuna, rol, no
 (15, 'roberto@gmail.com', '$2a$10$E/v7zueTyM/D0g33kJgQne2PMGDmbJIR/aheVoAzgSp1iGQ9D5YH.', 'Calama', 'Clamaa', 'Clama', 'usuario', 'Roberto');
 
 
+--tabla invitados
+CREATE TABLE public.invitados (
+    id SERIAL PRIMARY KEY,
+    nombre_completo character varying(100) NOT NULL,
+    email character varying(50) NOT NULL,
+    telefono character varying(20),
+    calle character varying(100),
+    numero character varying(10),
+    ciudad character varying(50),
+    producto character varying(100) NOT NULL,
+    cantidad integer NOT NULL,
+    valor decimal(10, 2) NOT NULL
+);
+
+--eliminar el campo productos, cantidad , valor de la tabla invitados
+ALTER TABLE invitados
+DROP COLUMN producto;
+
+ALTER TABLE invitados
+DROP COLUMN cantidad;
+
+ALTER TABLE invitados
+DROP COLUMN valor;
+
+--primare key a id_productos
+ALTER TABLE productos
+ADD CONSTRAINT productos_pkey PRIMARY KEY (id);
+
+
+--modificacion table usuarios
+ALTER TABLE usuarios
+ADD CONSTRAINT usuarios_pkey PRIMARY KEY (id);
+
+
+CREATE TABLE compras (
+    id SERIAL PRIMARY KEY,
+    usuario_id INTEGER REFERENCES usuarios(id),  -- Aquí debe existir la restricción
+    invitado_id INTEGER REFERENCES invitados(id),
+    producto_id INTEGER REFERENCES productos(id),
+    cantidad INTEGER NOT NULL,
+    email VARCHAR(50),  -- Para invitados
+    descripcion TEXT,
+    imagen VARCHAR(255),
+    nombre VARCHAR(100),
+    valor DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
