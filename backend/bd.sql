@@ -1,8 +1,89 @@
-CREATE DATABASE aromas_de_cafe;
+CREATE TABLE public.carrito (
+    id integer NOT NULL,
+    usuario_id integer NOT NULL,
+    producto_id integer NOT NULL,
+    cantidad integer NOT NULL,
+    email character varying NOT NULL,
+    descripcion text,
+    imagen character varying,
+    nombre character varying
+);
 
-\c aromas_de_cafe;
+ALTER TABLE public.carrito OWNER TO postgres;
 
--- Tabla de usuarios
+CREATE SEQUENCE public.carrito_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE public.carrito_id_seq OWNER TO postgres;
+
+ALTER SEQUENCE public.carrito_id_seq OWNED BY public.carrito.id;
+
+CREATE TABLE public.compras (
+    id integer NOT NULL,
+    usuario_id integer,
+    invitado_id integer,
+    producto_id integer,
+    cantidad integer NOT NULL,
+    email character varying(50),
+    descripcion text,
+    imagen character varying(255),
+    nombre character varying(100),
+    valor numeric(10,2) NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE public.compras OWNER TO postgres;
+
+CREATE SEQUENCE public.compras_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE public.compras_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.compras_id_seq OWNED BY public.compras.id;
+
+CREATE TABLE public.invitados (
+    id integer NOT NULL,
+    nombre_completo character varying(100) NOT NULL,
+    email character varying(50) NOT NULL,
+    telefono character varying(20),
+    calle character varying(100),
+    numero character varying(10),
+    ciudad character varying(50)
+);
+
+ALTER TABLE public.invitados OWNER TO postgres;
+
+CREATE SEQUENCE public.invitados_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER SEQUENCE public.invitados_id_seq OWNER TO postgres;
+
+ALTER SEQUENCE public.invitados_id_seq OWNED BY public.invitados.id;
+
+CREATE TABLE public.productos (
+    id integer NOT NULL,
+    nombre character varying(100) NOT NULL,
+    descripcion text,
+    precio numeric(10,2) NOT NULL,
+    imagen character varying(50)
+);
+
+ALTER TABLE public.productos OWNER TO postgres;
+
 CREATE TABLE public.usuarios (
     id integer NOT NULL,
     email character varying(50) NOT NULL,
@@ -14,46 +95,28 @@ CREATE TABLE public.usuarios (
     nombre character varying(50)
 );
 
-SELECT * FROM usuarios;
+ALTER TABLE public.usuarios OWNER TO postgres;
 
--- Tabla de productos (cafés)
-CREATE TABLE public.productos (
-    id integer NOT NULL,
-    nombre character varying(100) NOT NULL,
-    descripcion text,
-    precio numeric(10,2) NOT NULL,
-    imagen character varying(50)
-);
-
-SELECT * FROM productos;
-
--- Tabla de carrito
-CREATE TABLE carrito (
-    id SERIAL PRIMARY KEY,
-    usuario_id INT NOT NULL,
-    producto_id INT NOT NULL,
-    cantidad INT NOT NULL,
-    email VARCHAR NOT NULL,
-    descripcion TEXT,
-    imagen VARCHAR,
-    nombre VARCHAR
-);
-
-SELECT * FROM carrito;
+ALTER TABLE ONLY public.carrito ALTER COLUMN id SET DEFAULT nextval('public.carrito_id_seq'::regclass);
+ALTER TABLE ONLY public.compras ALTER COLUMN id SET DEFAULT nextval('public.compras_id_seq'::regclass);
+ALTER TABLE ONLY public.invitados ALTER COLUMN id SET DEFAULT nextval('public.invitados_id_seq'::regclass);
 
 
---agregando administradores
-INSERT INTO usuarios (id, nombre, email, pass, calle, ciudad, comuna, rol) VALUES 
-('1', 'Anakaren', 'admin@gmail.com', 'Admin', 'jdksfhalkf', 'kdsfjhkljf', 'sdfssagf', 'Administrador');
+SELECT * FROM public.carrito;
 
-INSERT INTO usuarios (id, nombre, email, pass, calle, ciudad, comuna, rol) VALUES 
-('2', 'Bernardo', 'admin2@gmail.com', 'Admin2', 'Digo de Almagro', 'Calama', 'El Loa', 'Administrador');
+INSERT INTO public.compras (id, usuario_id, invitado_id, producto_id, cantidad, email, descripcion, imagen, nombre, valor, created_at) 
+VALUES 
+(2, 11, NULL, 2, 1, 'ejemplo@gmail.com', 'Descripción de ejemplo', 'imagen.jpg', 'Café Arabica', 10.00, '2024-11-21 12:52:12.7914'),
+(6, 11, NULL, 1, 1, NULL, 'Un café suave y aromático con notas de frutas.', 'cafe1.jpg', 'Café Arabica', NULL, '2024-11-21 13:03:50.49496'),
+(7, NULL, 5, NULL, 1, NULL, NULL, NULL, NULL, NULL, '2024-11-22 05:14:35.830036');
 
-INSERT INTO usuarios (id, nombre, email, pass, calle, ciudad, comuna, rol) VALUES 
-('3', 'Lucas', 'admin3@gmail.com', 'Admin3', 'vcvcvcvcv', 'cvcvcvcv', 'cvcvcv', 'Administrador');
+INSERT INTO public.invitados (id, nombre_completo, email, telefono, calle, numero, ciudad) 
+VALUES 
+(4, 'boris', 'boris@gmail.com', '912345677', 'central sur', 2575, 'calama'),
+(5, 'pedro Castillo', 'pedroCastillo@gmail.com', '91234567', 'Granaderos', 2575, 'Calama');
 
-
-INSERT INTO public.productos (id, nombre, descripcion, precio, imagen) VALUES
+INSERT INTO public.productos (id, nombre, descripcion, precio, imagen) 
+VALUES 
 (1, 'Café Arabica', 'Un café suave y aromático con notas de frutas.', 3.99, 'cafe1.jpg'),
 (2, 'Café Robusta', 'Café fuerte y con cuerpo, ideal para los amantes del café intenso.', 4.49, 'cafe2.jpg'),
 (3, 'Café de Especialidad', 'Café de origen único, seleccionado por su calidad excepcional.', 5.99, 'cafe3.jpg'),
@@ -62,11 +125,8 @@ INSERT INTO public.productos (id, nombre, descripcion, precio, imagen) VALUES
 (6, 'Café Latte', 'Café suave con leche espumosa, un clásico en cualquier cafetería.', 4.29, 'cafe6.jpg');
 
 
---actualizando tabla productos
-SELECT * FROM productos;
-
-
-INSERT INTO public.usuarios (id, email, password, calle, ciudad, comuna, rol, nombre) VALUES
+INSERT INTO public.usuarios (id, email, password, calle, ciudad, comuna, rol, nombre) 
+VALUES 
 (1, 'admin@gmail.com', 'Admin', 'jdksfhalkf', 'kdsfjhkljf', 'sdfssagf', 'Administrador', 'Anakaren'),
 (2, 'admin2@gmail.com', 'Admin2', 'Digo de Almagro', 'Calama', 'El Loa', 'Administrador', 'Bernardo'),
 (3, 'admin3@gmail.com', 'Admin3', 'vcvcvcvcv', 'cvcvcvcv', 'cvcvcv', 'Administrador', 'Lucas'),
@@ -82,51 +142,45 @@ INSERT INTO public.usuarios (id, email, password, calle, ciudad, comuna, rol, no
 (14, 'wilson@gmail.com', '$2a$10$vevoFSxLm.ubHnGR2fvN6uIgLGbGLPpP74u7ZwlPChgt12mLtnYwq', 'Calama', 'Calama', 'Calama', 'usuario', 'Wilson'),
 (15, 'roberto@gmail.com', '$2a$10$E/v7zueTyM/D0g33kJgQne2PMGDmbJIR/aheVoAzgSp1iGQ9D5YH.', 'Calama', 'Clamaa', 'Clama', 'usuario', 'Roberto');
 
+ALTER TABLE ONLY public.carrito
+    ADD CONSTRAINT carrito_pkey PRIMARY KEY (id);
 
---tabla invitados
-CREATE TABLE public.invitados (
-    id SERIAL PRIMARY KEY,
-    nombre_completo character varying(100) NOT NULL,
-    email character varying(50) NOT NULL,
-    telefono character varying(20),
-    calle character varying(100),
-    numero character varying(10),
-    ciudad character varying(50),
-    producto character varying(100) NOT NULL,
-    cantidad integer NOT NULL,
-    valor decimal(10, 2) NOT NULL
-);
+ALTER TABLE ONLY public.compras
+    ADD CONSTRAINT compras_pkey PRIMARY KEY (id);
 
---eliminar el campo productos, cantidad , valor de la tabla invitados
-ALTER TABLE invitados
-DROP COLUMN producto;
+ALTER TABLE ONLY public.invitados
+    ADD CONSTRAINT invitados_pkey PRIMARY KEY (id);
 
-ALTER TABLE invitados
-DROP COLUMN cantidad;
+ALTER TABLE ONLY public.productos
+    ADD CONSTRAINT productos_pkey PRIMARY KEY (id);
 
-ALTER TABLE invitados
-DROP COLUMN valor;
+ALTER TABLE ONLY public.usuarios
+    ADD CONSTRAINT usuarios_pkey PRIMARY KEY (id);
 
---primare key a id_productos
-ALTER TABLE productos
-ADD CONSTRAINT productos_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.compras
+    ADD CONSTRAINT compras_invitado_id_fkey FOREIGN KEY (invitado_id) REFERENCES public.invitados(id);
+
+ALTER TABLE ONLY public.compras
+    ADD CONSTRAINT compras_producto_id_fkey FOREIGN KEY (producto_id) REFERENCES public.productos(id);
+
+ALTER TABLE ONLY public.compras
+    ADD CONSTRAINT compras_usuario_id_fkey FOREIGN KEY (usuario_id) REFERENCES public.usuarios(id);
 
 
---modificacion table usuarios
+SELECT * FROM usuarios;
+SELECT * FROM carrito;
+SELECT * FROM productos;
+SELECT * FROM invitados;
+
 ALTER TABLE usuarios
-ADD CONSTRAINT usuarios_pkey PRIMARY KEY (id);
+ALTER COLUMN id DROP NOT NULL;
 
+ALTER TABLE usuarios
+ALTER COLUMN id SET DEFAULT nextval('14');
 
-CREATE TABLE compras (
-    id SERIAL PRIMARY KEY,
-    usuario_id INTEGER REFERENCES usuarios(id),  -- Aquí debe existir la restricción
-    invitado_id INTEGER REFERENCES invitados(id),
-    producto_id INTEGER REFERENCES productos(id),
-    cantidad INTEGER NOT NULL,
-    email VARCHAR(50),  -- Para invitados
-    descripcion TEXT,
-    imagen VARCHAR(255),
-    nombre VARCHAR(100),
-    valor DECIMAL(10, 2) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+CREATE SEQUENCE usuarios_id_seq;
+ALTER TABLE usuarios ALTER COLUMN id SET DEFAULT nextval('usuarios_id_seq');
+
+SELECT MAX(id) FROM usuarios;
+
+SELECT setval('usuarios_id_seq', (SELECT MAX(id) FROM usuarios));
