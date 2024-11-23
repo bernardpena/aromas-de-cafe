@@ -14,14 +14,14 @@ import Login from '../src/components/Login';
 import PoliticaPrivacidad from '../src/components/PoliticaPrivacidad';
 import TerminosDeServicio from '../src/components/TerminosDeServicio';
 import Header from '../src/components/Header';
-import Carousel from "./components/Carousel";
 import Footer from '../src/components/Footer';
+import Ventas from '../src/components/Ventas';
 
 function App() {
-  const [isLoginVisible, setLoginVisible] = useState(false); // Estado para controlar la visibilidad del modal
+  const [isLoginVisible, setLoginVisible] = useState(false); 
 
   const handleOpenLogin = () => {
-    setLoginVisible(true); // Abre el modal
+    setLoginVisible(true); 
   };
 
   const handleCloseLogin = () => {
@@ -48,6 +48,7 @@ function App() {
             <Route path="/cart" element={<Cart onRequestLogin={handleOpenLogin} />} />
             <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
             <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
+            <Route path="/ventas" element={<Ventas />} />
           </Routes>
           <Footer onOpenLogin={handleOpenLogin} /> 
         </Router>

@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const salesRoutes = require("./routes/salesRoutes"); 
 const db = require("./config/db");
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api", cartRoutes); 
+app.use("/api/sales", salesRoutes);
 
 // error 404
 app.use((req, res) => {
