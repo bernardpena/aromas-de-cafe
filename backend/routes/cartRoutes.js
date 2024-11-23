@@ -14,4 +14,7 @@ router.delete("/cart/:userId/:producto_id", cartController.removeFromCart);
 // Ruta para guardar
 router.post("/cart", cartController.saveCart);
 
+// Ruta obtener los datos del carrito
+// router.get("/", cartController.getCartItems);
+
 module.exports = router;

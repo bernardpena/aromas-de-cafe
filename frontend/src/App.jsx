@@ -49,7 +49,7 @@ function App() {
             <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
             <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
           </Routes>
-          <Footer />
+          <Footer onOpenLogin={handleOpenLogin} /> 
         </Router>
       </CartProvider>
     </UserProvider>

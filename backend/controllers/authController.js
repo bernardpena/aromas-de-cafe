@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const pool = require("../config/db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -44,7 +43,7 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    // console.log("JWT_SECRET:", process.env.JWT_SECRET);
     console.log("TEST_VAR:", process.env.TEST_VAR);
     console.log("Datos de entrada:", req.body);
 
@@ -57,7 +56,6 @@ exports.login = async (req, res) => {
     const user = await pool.query("SELECT * FROM usuarios WHERE email = $1", [
       email,
     ]);
-
     console.log("Consultando usuario con email:", email);
 
     if (user.rows.length === 0) {
@@ -87,5 +85,50 @@ exports.login = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error al iniciar sesión", error: error.message });
+  }
+};
+
+// agregar administrador
+exports.addAdministrator = async (req, res) => {
+  console.log("Datos de nuevo administrador recibidos:", req.body);
+  try {
+    const {
+      nombre,
+      email,
+      password,
+      calle,
+      ciudad,
+      comuna,
+      rol = "admin",
+    } = req.body;
+
+    if (!password || password.length === 0) {
+      return res.status(400).json({ message: "La contraseña es requerida" });
+    }
+
+    const existingUser = await pool.query(
+      "SELECT * FROM usuarios WHERE email = $1",
+      [email]
+    );
+    if (existingUser.rows.length > 0) {
+      return res.status(409).json({ message: "El email ya está en uso" });
+    }
+
+    // Hasear la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await pool.query(
+      "INSERT INTO usuarios (nombre, email, password, calle, ciudad, comuna, rol) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+      [nombre, email, hashedPassword, calle, ciudad, comuna, rol]
+    );
+
+    return res
+      .status(201)
+      .json({ message: "Administrador agregado exitosamente" });
+  } catch (error) {
+    console.error("Error al agregar administrador:", error);
+    return res
+      .status(500)
+      .json({ message: "Error al agregar el administrador" });
   }
 };
