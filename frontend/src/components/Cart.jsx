@@ -13,34 +13,56 @@ function Cart({ onRequestLogin }) {
     const itemCount = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
     const saveCartToDatabase = async (direccion, isGuest) => {
-        const payload = isGuest
-            ? {
-                invitado: {
-                    nombre_completo: direccion.nombre,
-                    email: direccion.correo,
-                    telefono: direccion.telefono,
-                    calle: direccion.calle,
-                    numero: direccion.numero,
-                    ciudad: direccion.ciudad,
-                },
-                items: cart.map(item => ({
-                    producto: item.nombre,
-                    cantidad: item.cantidad,
-                    valor: item.precio * item.cantidad
-                }))
+        // Validando carrito
+        cart.forEach(item => {
+            const valor = item.valor;
+
+            console.log("Valor del producto:", item.valor); 
+
+            if (typeof item.valor !== 'number' || isNaN(item.valor) || item.valor < 0) {
+                console.error("Error: Precio inválido para el producto", item);
+                // alert(`El precio es inválido para el producto ${item.nombre}`);
             }
-            : {
-                usuario_id: user.id,
-                items: cart.map(item => ({
-                    producto_id: item.id,
-                    cantidad: item.cantidad,
-                    descripcion: item.descripcion,
-                    imagen: item.imagen,
-                    nombre: item.nombre,
-                }))
-            };
+            if (typeof item.cantidad !== 'number' || isNaN(item.cantidad) || item.cantidad <= 0) {
+                console.error("Error: Cantidad inválida para el producto", item);
+                // alert(`La cantidad es inválida para el producto ${item.nombre}`);
+            }
+        });
     
-        console.log("Payload enviado:", JSON.stringify(payload)); 
+        const payload = isGuest
+    ? {
+        invitado: {
+            nombre_completo: direccion.nombre,
+            email: direccion.correo,
+            telefono: direccion.telefono,
+            calle: direccion.calle,
+            numero: direccion.numero,
+            ciudad: direccion.ciudad,
+        },
+        items: cart.map(item => ({
+            producto: item.nombre,
+            cantidad: item.cantidad,
+            valor: parseFloat(item.precio) * item.cantidad 
+        }))
+    }
+    : {
+        usuario_id: user.id,
+        items: cart.map(item => {
+            const precioNumerico = typeof item.precio === 'string' ? parseFloat(item.precio) : item.precio;
+            const valor = precioNumerico * item.cantidad;
+
+            return {
+                producto_id: item.id,
+                cantidad: item.cantidad,
+                descripcion: item.descripcion,
+                imagen: item.imagen,
+                nombre: item.nombre,
+                valor: valor 
+            };
+        })
+    };
+
+console.log("Payload enviado:", JSON.stringify(payload)); 
     
         const response = await fetch('http://localhost:5001/api/cart', {
             method: 'POST',
@@ -79,7 +101,6 @@ function Cart({ onRequestLogin }) {
             });
     
             if (confirmPaymentMethod) {
-                // Solicitar datos
                 const { value: formValues = {} } = await Swal.fire({
                     title: 'Datos de Envío',
                     html: `

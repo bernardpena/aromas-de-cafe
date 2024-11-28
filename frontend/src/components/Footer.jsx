@@ -5,8 +5,7 @@ import '../assets/css/footer.css';
 function Footer() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    // Manejar el inicio de sesión del administrador
+   
     const handleAdminLogin = async (email, password) => {
         try {
             // const response = await fetch('http://localhost:5001/api/cart', {
@@ -20,22 +19,18 @@ function Footer() {
                     password,
                 }),
             });
-
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Error al iniciar sesión');
             }
-
             const data = await response.json();
             console.log("Inicio de sesión exitoso:", data);
             Swal.fire('Éxito!', 'Has iniciado sesión como administrador.', 'success');
-
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
             Swal.fire('Error!', error.message || 'No se pudo iniciar sesión.', 'error');
         }
     };
-
     const showModal = () => {
         Swal.fire({
             title: 'Bienvenido!',
@@ -52,17 +47,13 @@ function Footer() {
             preConfirm: () => {
                 const inputEmail = document.getElementById('email');
                 const inputPassword = document.getElementById('password');
-
                 if (!inputEmail || !inputPassword) {
                     Swal.showValidationMessage('Por favor, llena todos los campos');
                     return false;
                 }
-
                 const emailValue = inputEmail.value.trim();
                 const passwordValue = inputPassword.value.trim();
-
                 console.log("Valores capturados:", { emailValue, passwordValue });
-
                 if (!emailValue || !passwordValue) {
                     Swal.showValidationMessage('Por favor, llena todos los campos');
                     return false;
@@ -78,7 +69,7 @@ function Footer() {
     };
 
     return (
-        <footer className="text-light text-center navbar-dark colorFondo py-4">
+   <footer className="text-light text-center navbar-dark colorFondo py-4">
             <div className="container navbar-dark colorFondo">
                 <p>&copy; 2024 Aromas de Café</p>
                 <p>Todos los derechos reservados.</p>

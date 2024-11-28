@@ -23,7 +23,7 @@ function ProductList() {
 
     const handleAddToCart = (product) => {
         addToCart(product);
-        alert(`${product.nombre} ha sido agregado al carrito.`);
+        // alert(`${product.nombre} ha sido agregado al carrito.`);
     };
 
     return (
