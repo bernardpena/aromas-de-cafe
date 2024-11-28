@@ -4,12 +4,12 @@ import '../assets/css/navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faSignInAlt, faUserPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserProvider';
-import { CartContext } from '../context/CartContext'; 
+import { CartContext } from '../context/CartContext';
 
 function Navbar({ onLoginClick }) {
   const { user, setUser } = useContext(UserContext);
   const { cart } = useContext(CartContext);
-  
+
   const itemCount = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
   const handleLogout = () => {
@@ -38,6 +38,9 @@ function Navbar({ onLoginClick }) {
                     <Link className="nav-link" to="/ventas">Ventas</Link>
                   </li>
                 )}
+                <li className="nav-item">
+                  <Link className="nav-link" to="/ventas">Ventas</Link>
+                </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#" onClick={handleLogout}>
                     <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar Sesión
