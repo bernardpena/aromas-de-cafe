@@ -7,7 +7,7 @@
     "pg": "^8.13.1",
     "scripts": {
         "dev": "vite",
-        "build": "remix vite build",
+        "build": "npm run build",
         "lint": "eslint .",
         "preview": "vite preview"
     },
