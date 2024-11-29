@@ -18,12 +18,10 @@
     height: 50px; 
     overflow: hidden; 
     text-overflow: ellipsis; 
-    /* white-space: nowrap;  */
 }
 
 .price {
     background-color: #f8f9fa; 
-    /* border: 1px solid #d9534f;  */
     border-radius: 5px;        
     padding: 2px;              
     color: #d9534f;           
