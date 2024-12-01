@@ -10,16 +10,14 @@ const db = require("./config/db");
 
 const app = express();
 app.use(express.json());
-// app.use(cors());
-app.use(bodyParser.json());
-
-//para conectarse con el frontend
+//modificaciones para conectarse con el frontend
 app.use(
   cors({
     origin: "https://aromas-de-cafe.onrender.com/",
-    credentials: true,
   })
 );
+//credentials: true,
+app.use(bodyParser.json());
 
 // Rutas
 app.use("/api/auth", authRoutes);
