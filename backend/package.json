@@ -6,11 +6,11 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1",
     "scripts": {
-    "start": "node app.js",               
-    "dev": "nodemon app.js",               
-    "build": "npm run build", 
-    "lint": "eslint .",                     
-    "test": "jest"                         
+        "start": "node app.js",
+        "dev": "nodemon app.js",
+        "build": "npm install",
+        "lint": "eslint .",
+        "test": "jest"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.6.0",
