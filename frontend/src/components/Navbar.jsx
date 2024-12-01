@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faSignInAlt, faUserPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../context/UserProvider';
 import { CartContext } from '../context/CartContext';
+import logo from '../../public/AromasdeCafe_LOGO.png';
+
 
 function Navbar({ onLoginClick }) {
   const { user, setUser } = useContext(UserContext);
@@ -21,7 +23,7 @@ function Navbar({ onLoginClick }) {
     <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img className="logo" src="./public/AromasdeCafe_LOGO.png" alt="Aromas de Café Logo" />
+          <img className="logo" src={logo} alt="LOGO Aromas de Café" />
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -38,9 +40,6 @@ function Navbar({ onLoginClick }) {
                     <Link className="nav-link" to="/ventas">Ventas</Link>
                   </li>
                 )}
-                {/* <li className="nav-item">
-                  <Link className="nav-link" to="/ventas">Ventas</Link>
-                </li> */}
                 <li className="nav-item">
                   <a className="nav-link" href="#" onClick={handleLogout}>
                     <FontAwesomeIcon icon={faSignOutAlt} /> Cerrar Sesión
