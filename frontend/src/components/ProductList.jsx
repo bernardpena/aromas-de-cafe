@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import '../assets/css/productList.css';
+require("dotenv").config();
 
 function ProductList() {
     const { addToCart } = useContext(CartContext);

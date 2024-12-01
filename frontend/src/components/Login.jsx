@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { UserContext } from '../context/UserProvider';
+require("dotenv").config();
 
 function Login({ onClose }) {
   const { setUser } = useContext(UserContext);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import '../assets/css/footer.css';
+require("dotenv").config();
 
 function Footer() {
     const [email, setEmail] = useState('');

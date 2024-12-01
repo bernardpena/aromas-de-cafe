@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import Modal from './Modal'; 
+import Modal from './Modal';
+require("dotenv").config();
 
 const CheckoutForm = ({ cart }) => {
     const stripe = useStripe();
@@ -30,13 +31,13 @@ const CheckoutForm = ({ cart }) => {
             if (paymentIntent.status === 'succeeded') {
                 console.log('¡Pago exitoso!', paymentIntent);
                 setModalMessage({ title: 'Pago exitoso', text: 'Tu pago se ha realizado con éxito.' });
-                setModalOpen(true); 
+                setModalOpen(true);
             }
         }
     };
 
     const closeModal = () => {
-        setModalOpen(false); 
+        setModalOpen(false);
     };
 
     return (

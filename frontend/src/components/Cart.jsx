@@ -4,6 +4,7 @@ import { UserContext } from '../context/UserProvider';
 import '../assets/css/cart.css';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+require("dotenv").config();
 
 function Cart({ onRequestLogin }) {
     const navigate = useNavigate();

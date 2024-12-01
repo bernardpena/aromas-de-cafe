@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../assets/css/register.css';
 import Modal from './Modal';
+require("dotenv").config();
 
 const Register = () => {
   const [nombre, setNombre] = useState('');

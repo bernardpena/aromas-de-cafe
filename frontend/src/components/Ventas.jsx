@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
+require("dotenv").config();
 
 function Ventas() {
     const [ventas, setVentas] = useState([]);

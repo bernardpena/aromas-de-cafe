@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
+require("dotenv").config();
 
 function Ventas() {
     const [ventas, setVentas] = useState([]);
@@ -10,7 +11,7 @@ function Ventas() {
         const fetchVentas = async () => {
             try {
                 // const response = await fetch('http://localhost:5001/api/cart',
-                const response = await fetch('${process.env.REACT_APP_API_URL}/api/cart');
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/cart`);
                 if (!response.ok) {
                     throw new Error('Error al obtener los datos de ventas');
                 }
