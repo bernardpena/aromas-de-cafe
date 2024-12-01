@@ -10,9 +10,10 @@ function Ventas() {
     useEffect(() => {
         const fetchVentas = async () => {
             setLoading(true);
-            setError(null); 
+            setError(null);
             try {
-                const response = await fetch('http://localhost:5001/api/sales');
+                // const response = await fetch('http://localhost:5001/api/sales');
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/sales`);
                 if (!response.ok) {
                     const errorData = await response.json();
                     const errorMessage = errorData.message || `Error al obtener ventas (${response.status})`;
@@ -20,7 +21,7 @@ function Ventas() {
                 }
                 const data = await response.json();
                 setVentas(data);
-                setTotal(data.reduce((acc, item) => acc + Number(item.valor), 0)); 
+                setTotal(data.reduce((acc, item) => acc + Number(item.valor), 0));
             } catch (error) {
                 setError(error);
                 console.error("Error al cargar las ventas:", error);
@@ -56,8 +57,8 @@ function Ventas() {
                                     <td>{venta.id}</td>
                                     <td>{venta.nombre}</td>
                                     <td>{venta.cantidad}</td>
-                                    <td>${(!isNaN(venta.valor) && !isNaN(venta.cantidad) && venta.cantidad > 0 
-                                        ? (Number(venta.valor) / Number(venta.cantidad)).toFixed(2) 
+                                    <td>${(!isNaN(venta.valor) && !isNaN(venta.cantidad) && venta.cantidad > 0
+                                        ? (Number(venta.valor) / Number(venta.cantidad)).toFixed(2)
                                         : 'N/A')}</td>
                                     <td>${(!isNaN(venta.valor) ? Number(venta.valor).toFixed(2) : 'N/A')}</td>
                                     <td>{new Date(venta.created_at).toLocaleString()}</td>

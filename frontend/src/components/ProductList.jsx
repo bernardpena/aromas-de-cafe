@@ -9,7 +9,8 @@ function ProductList() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:5001/api/products');
+                // const response = await fetch('http://localhost:5001/api/products');
+                const response = await fetch(`${process.env.REACT_APP_API_URL}`);
                 const data = await response.json();
                 setProducts(data);
                 console.log(data);
@@ -32,9 +33,9 @@ function ProductList() {
             <div className="row mt-4">
                 {products.map(product => (
                     <div className="col-md-4 mb-4" key={product.id}>
-                        <div className="card h-100 d-flex flex-column"> 
+                        <div className="card h-100 d-flex flex-column">
                             <img src={product.imagen} alt={product.nombre} className="card-img-top" />
-                            <div className="card-body d-flex flex-column flex-grow-1"> 
+                            <div className="card-body d-flex flex-column flex-grow-1">
                                 <h5 className="card-title">{product.nombre}</h5>
                                 <p className="card-text">{product.descripcion}</p>
                                 <p className="card-text price">${product.precio}</p>

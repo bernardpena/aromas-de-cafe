@@ -9,7 +9,7 @@ function Cart({ onRequestLogin }) {
     const navigate = useNavigate();
     const { cart, removeFromCart, clearCart } = useContext(CartContext);
     const { user } = useContext(UserContext);
-    
+
     const itemCount = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
     const saveCartToDatabase = async (direccion, isGuest) => {
@@ -17,7 +17,7 @@ function Cart({ onRequestLogin }) {
         cart.forEach(item => {
             const valor = item.valor;
 
-            console.log("Valor del producto:", item.valor); 
+            console.log("Valor del producto:", item.valor);
 
             if (typeof item.valor !== 'number' || isNaN(item.valor) || item.valor < 0) {
                 console.error("Error: Precio inválido para el producto", item);
@@ -28,43 +28,44 @@ function Cart({ onRequestLogin }) {
                 // alert(`La cantidad es inválida para el producto ${item.nombre}`);
             }
         });
-    
+
         const payload = isGuest
-    ? {
-        invitado: {
-            nombre_completo: direccion.nombre,
-            email: direccion.correo,
-            telefono: direccion.telefono,
-            calle: direccion.calle,
-            numero: direccion.numero,
-            ciudad: direccion.ciudad,
-        },
-        items: cart.map(item => ({
-            producto: item.nombre,
-            cantidad: item.cantidad,
-            valor: parseFloat(item.precio) * item.cantidad 
-        }))
-    }
-    : {
-        usuario_id: user.id,
-        items: cart.map(item => {
-            const precioNumerico = typeof item.precio === 'string' ? parseFloat(item.precio) : item.precio;
-            const valor = precioNumerico * item.cantidad;
+            ? {
+                invitado: {
+                    nombre_completo: direccion.nombre,
+                    email: direccion.correo,
+                    telefono: direccion.telefono,
+                    calle: direccion.calle,
+                    numero: direccion.numero,
+                    ciudad: direccion.ciudad,
+                },
+                items: cart.map(item => ({
+                    producto: item.nombre,
+                    cantidad: item.cantidad,
+                    valor: parseFloat(item.precio) * item.cantidad
+                }))
+            }
+            : {
+                usuario_id: user.id,
+                items: cart.map(item => {
+                    const precioNumerico = typeof item.precio === 'string' ? parseFloat(item.precio) : item.precio;
+                    const valor = precioNumerico * item.cantidad;
 
-            return {
-                producto_id: item.id,
-                cantidad: item.cantidad,
-                descripcion: item.descripcion,
-                imagen: item.imagen,
-                nombre: item.nombre,
-                valor: valor 
+                    return {
+                        producto_id: item.id,
+                        cantidad: item.cantidad,
+                        descripcion: item.descripcion,
+                        imagen: item.imagen,
+                        nombre: item.nombre,
+                        valor: valor
+                    };
+                })
             };
-        })
-    };
 
-console.log("Payload enviado:", JSON.stringify(payload)); 
-    
-        const response = await fetch('http://localhost:5001/api/cart', {
+        console.log("Payload enviado:", JSON.stringify(payload));
+
+        // const response = await fetch('http://localhost:5001/api/cart', {        
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,15 +73,15 @@ console.log("Payload enviado:", JSON.stringify(payload));
             },
             body: JSON.stringify(payload),
         });
-    
+
         if (response.ok) {
             const responseData = await response.json();
             console.log('Carrito guardado exitosamente:', responseData);
-            return true; 
+            return true;
         } else {
-            const errorData = await response.json(); 
+            const errorData = await response.json();
             console.error('Error al guardar el carrito:', errorData);
-            return false; 
+            return false;
         }
     };
 
@@ -89,7 +90,7 @@ console.log("Payload enviado:", JSON.stringify(payload));
             alert('Tu carrito está vacío. Agrega productos antes de proceder al pago.');
             return;
         }
-    
+
         if (!user) {
             const { value: confirmPaymentMethod } = await Swal.fire({
                 title: 'Continuar como invitado',
@@ -99,7 +100,7 @@ console.log("Payload enviado:", JSON.stringify(payload));
                 confirmButtonText: 'Continuar',
                 cancelButtonText: 'Inicio de sesión'
             });
-    
+
             if (confirmPaymentMethod) {
                 const { value: formValues = {} } = await Swal.fire({
                     title: 'Datos de Envío',
@@ -123,22 +124,22 @@ console.log("Payload enviado:", JSON.stringify(payload));
                         };
                     }
                 });
-    
+
                 if (formValues) {
-                    const saved = await saveCartToDatabase(formValues, true); 
+                    const saved = await saveCartToDatabase(formValues, true);
                     if (saved) {
                         Swal.fire(
                             '¡Éxito!',
                             'Productos pagados satisfactoriamente! Estamos preparando su pedido para que llegue lo más pronto posible.',
                             'success'
                         );
-                        clearCart(); 
+                        clearCart();
                     }
                 }
             } else {
                 const loggedInUser = await onRequestLogin();
                 if (loggedInUser) {
-                    const saved = await saveCartToDatabase(); 
+                    const saved = await saveCartToDatabase();
                     if (saved) {
                         Swal.fire(
                             '¡Éxito!',
@@ -150,19 +151,19 @@ console.log("Payload enviado:", JSON.stringify(payload));
                 }
             }
         } else {
-            
-            const saved = await saveCartToDatabase(); 
+
+            const saved = await saveCartToDatabase();
             if (saved) {
                 Swal.fire(
                     '¡Éxito!',
                     'Productos pagados satisfactoriamente! Estamos preparando su pedido para que llegue lo más pronto posible.',
                     'success'
                 );
-                clearCart(); 
+                clearCart();
             }
         }
     };
-    
+
     return (
         <div className="container">
             <h2>Carrito</h2>

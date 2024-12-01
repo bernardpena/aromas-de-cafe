@@ -5,11 +5,11 @@ import '../assets/css/footer.css';
 function Footer() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-   
+
     const handleAdminLogin = async (email, password) => {
         try {
-            // const response = await fetch('http://localhost:5001/api/cart', {
-            const response = await fetch('http://localhost:5001/api/auth/login', {
+            // const response = await fetch('http://localhost:5001/api/auth/login', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ function Footer() {
     };
 
     return (
-   <footer className="text-light text-center navbar-dark colorFondo py-4">
+        <footer className="text-light text-center navbar-dark colorFondo py-4">
             <div className="container navbar-dark colorFondo">
                 <p>&copy; 2024 Aromas de Café</p>
                 <p>Todos los derechos reservados.</p>
