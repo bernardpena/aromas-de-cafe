@@ -4,7 +4,8 @@ import { UserContext } from '../context/UserProvider';
 import '../assets/css/cart.css';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-require("dotenv").config();
+import dotenv from 'dotenv';
+// dotenv.config();
 
 function Cart({ onRequestLogin }) {
     const navigate = useNavigate();
@@ -66,7 +67,7 @@ function Cart({ onRequestLogin }) {
         console.log("Payload enviado:", JSON.stringify(payload));
 
         // const response = await fetch('http://localhost:5001/api/cart', {        
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/cart`, {
+        const response = await fetch(`https://backend-585p.onrender.com/api/cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

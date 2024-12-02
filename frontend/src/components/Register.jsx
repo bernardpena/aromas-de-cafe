@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../assets/css/register.css';
 import Modal from './Modal';
-require("dotenv").config();
+import dotenv from 'dotenv';
+// dotenv.config();
 
 const Register = () => {
   const [nombre, setNombre] = useState('');
@@ -35,7 +36,7 @@ const Register = () => {
 
     try {
       // const response = await fetch('http://localhost:5001/api/auth/register', {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
+      const response = await fetch(`https://backend-585p.onrender.com/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre, email, password, calle, ciudad, comuna }),

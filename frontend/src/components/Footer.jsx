@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import '../assets/css/footer.css';
-require("dotenv").config();
+import dotenv from 'dotenv';
+// dotenv.config();
 
 function Footer() {
     const [email, setEmail] = useState('');
@@ -10,7 +11,7 @@ function Footer() {
     const handleAdminLogin = async (email, password) => {
         try {
             // const response = await fetch('http://localhost:5001/api/auth/login', {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
+            const response = await fetch(`https://backend-585p.onrender.com/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

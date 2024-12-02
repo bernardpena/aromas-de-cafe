@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import '../assets/css/productList.css';
-require("dotenv").config();
+import dotenv from 'dotenv';
+
+// const REACT_APP_API_URL = 'https://backend-585p.onrender.com';
+// const apiUrl = process.env.REACT_APP_API_URL;
 
 function ProductList() {
     const { addToCart } = useContext(CartContext);
@@ -11,7 +14,7 @@ function ProductList() {
         const fetchProducts = async () => {
             try {
                 // const response = await fetch('http://localhost:5001/api/products');
-                const response = await fetch(`${process.env.REACT_APP_API_URL}`);
+                const response = await fetch(`https://backend-585p.onrender.com/api/products`);
                 const data = await response.json();
                 setProducts(data);
                 console.log(data);
