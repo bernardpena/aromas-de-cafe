@@ -1,0 +1,31 @@
+.registro{
+    background-color: saddlebrown !important; 
+    border-radius: 8px;
+    max-width: 800px !important; 
+    margin: auto;
+  }
+  
+  h2 {
+    color: #ffffff !important; 
+    font-size: 2.5rem;
+  }
+  
+  input.form-control {
+    border-radius: 5px; 
+  }
+  
+  .btn {
+    background-color: #28a745; 
+    border: none;
+    font-weight: bold; 
+  }
+  
+  .btn:hover {
+    background-color: #218838; 
+  }
+
+  form {
+    padding: 20px; 
+    border-radius: 4px; 
+    width: 100%;
+}

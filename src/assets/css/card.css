@@ -1,0 +1,38 @@
+.container {
+    background-color: #E5C7A6;
+  }
+  
+  .container .card{
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      }
+    
+      .card {
+        transition: transform 0.2s; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); 
+        margin: 0.5rem auto; 
+        /* width: 100%;  */
+        max-width: 400px;
+        border-radius: 20px;
+      }
+      
+      .card img{
+        border-radius: 10px;
+        width: 100%;
+        /* transition: transform 0.3s ease; */
+      }
+      
+      .card:hover {
+        transform: translateY(-4px); 
+        transform: scale(1.03);
+      }
+      
+      .add-button{
+        background-color: rgb(133, 113, 54);
+        color: white;
+      }
+  
+      .button:focus, button:focus-visible {
+      outline: 4px auto -webkit-focus-ring-color;
+      }
