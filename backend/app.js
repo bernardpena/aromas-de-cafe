@@ -13,7 +13,7 @@ app.use(express.json());
 //modificaciones para conectarse con el frontend
 app.use(
   cors({
-    origin: "https://aromas-de-cafe.onrender.com/",
+    origin: "https://aromas-de-cafe.onrender.com",
   })
 );
 //credentials: true,
