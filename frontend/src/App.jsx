@@ -11,28 +11,28 @@ import ProductList from '../src/components/ProductList';
 import Register from '../src/components/Register';
 import Cart from '../src/components/Cart';
 import Login from '../src/components/Login';
-import PoliticaPrivacidad from '../src/components/PoliticaPrivacidad';
-import TerminosDeServicio from '../src/components/TerminosDeServicio';
+import PoliticaPrivacidad from './components/PoliticaPrivacidad';
+import TerminosDeServicio from './components/TerminosDeServicio';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import Ventas from '../src/components/Ventas';
 
 function App() {
-  const [isLoginVisible, setLoginVisible] = useState(false); 
+  const [isLoginVisible, setLoginVisible] = useState(false);
 
   const handleOpenLogin = () => {
-    setLoginVisible(true); 
+    setLoginVisible(true);
   };
 
   const handleCloseLogin = () => {
-    setLoginVisible(false); 
+    setLoginVisible(false);
   };
 
   return (
     <UserProvider>
       <CartProvider>
         <Router>
-          <Navbar onLoginClick={handleOpenLogin} /> 
+          <Navbar onLoginClick={handleOpenLogin} />
           <Header />
           {isLoginVisible && (
             <div className="modal" onClick={handleCloseLogin}>
@@ -50,7 +50,7 @@ function App() {
             <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
             <Route path="/ventas" element={<Ventas />} />
           </Routes>
-          <Footer onOpenLogin={handleOpenLogin} /> 
+          <Footer onOpenLogin={handleOpenLogin} />
         </Router>
       </CartProvider>
     </UserProvider>
