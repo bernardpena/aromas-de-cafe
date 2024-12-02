@@ -78,13 +78,13 @@ function Footer() {
                 <p>Todos los derechos reservados.</p>
                 <ul className="list-inline">
                     <li className="list-inline-item">
-                        <a href="/politica-privacidad" className="text-light">Política de Privacidad</a>
+                        <Link to="/politica-privacidad" className="text-light">Política de Privacidad</Link>
                     </li>
                     <li className="list-inline-item">
-                        <Link href="/terminos-de-servicio" className="text-light">Términos de Servicio</Link>
+                        <Link to="/terminos-de-servicio" className="text-light">Términos de Servicio</Link>
                     </li>
                     <li className="list-inline-item">
-                        <Link href="#" onClick={showModal} className="text-light">Administración</Link>
+                        <a href="#" onClick={showModal} className="text-light">Administración</a>
                     </li>
                 </ul>
             </div>
