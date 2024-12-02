@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import '../assets/css/footer.css';
+import { Link } from 'react-router-dom';
 import dotenv from 'dotenv';
 // dotenv.config();
 
@@ -80,10 +81,10 @@ function Footer() {
                         <a href="/politica-privacidad" className="text-light">Política de Privacidad</a>
                     </li>
                     <li className="list-inline-item">
-                        <a href="/terminos-de-servicio" className="text-light">Términos de Servicio</a>
+                        <Link href="/terminos-de-servicio" className="text-light">Términos de Servicio</Link>
                     </li>
                     <li className="list-inline-item">
-                        <a href="#" onClick={showModal} className="text-light">Administración</a>
+                        <Link href="#" onClick={showModal} className="text-light">Administración</Link>
                     </li>
                 </ul>
             </div>
