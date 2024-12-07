@@ -10,6 +10,8 @@ function Profile() {
     ciudad: '',
     comuna: '',
   });
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -27,14 +29,15 @@ function Profile() {
           setFormData(userData); // Establece los datos del usuario en el estado
         } else {
           const errorText = await response.text();
-          alert(errorText || 'Error al cargar los datos del perfil');
+          setError(errorText || 'Error al cargar los datos del perfil');
         }
       } catch (error) {
         console.error('Error al obtener los datos del perfil:', error);
-        alert('Hubo un problema al cargar el perfil: ' + error.message);
+        setError('Hubo un problema al cargar el perfil: ' + error.message);
       }
     };
 
+    // Solo si existe user se realiza la llamada
     if (user) {
       fetchUserData();
     }
@@ -59,20 +62,25 @@ function Profile() {
       if (response.ok) {
         const updatedUser = await response.json();
         setUser(updatedUser);
-        alert('Perfil actualizado correctamente');
+        setMessage('Perfil actualizado correctamente');
+        setError('');
       } else {
         const errorText = await response.text();
-        alert(errorText || 'Error al actualizar el perfil');
+        setError(errorText || 'Error al actualizar el perfil');
+        setMessage('');
       }
     } catch (error) {
       console.error('Error al actualizar el perfil:', error);
-      alert('Hubo un problema al actualizar el perfil: ' + error.message);
+      setError('Hubo un problema al actualizar el perfil: ' + error.message);
+      setMessage('');
     }
   };
 
   return (
     <div className="container">
       <h1>Perfil de Usuario</h1>
+      {message && <div className="alert alert-success">{message}</div>} {/* Mensaje de éxito */}
+      {error && <div className="alert alert-danger">{error}</div>} {/* Mensaje de error */}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="nombre" className="form-label">Nombre</label>
