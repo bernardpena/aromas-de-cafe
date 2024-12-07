@@ -22,7 +22,10 @@ const UserInfo = () => {
             <div className="user-info-card">
                 <h2>{user.nombre}</h2>
                 <p><strong>Email:</strong> {user.email}</p>
-                <p><strong>Rol:</strong> {user.rol}</p>
+                <p><strong>Rol:</strong> {user.calle}</p>
+                <p><strong>Rol:</strong> {user.ciudad}</p>
+                <p><strong>Rol:</strong> {user.comuna}</p>
+                {/* <p><strong>Rol:</strong> {user.rol}</p> */}
                 <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
             </div>
         </div>
