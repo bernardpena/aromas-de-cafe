@@ -7,7 +7,6 @@ import { UserContext } from '../context/UserProvider';
 import { CartContext } from '../context/CartContext';
 import logo from '../../public/AromasdeCafe_LOGO.png';
 
-
 function Navbar({ onLoginClick }) {
   const { user, setUser } = useContext(UserContext);
   const { cart } = useContext(CartContext);
@@ -34,6 +33,9 @@ function Navbar({ onLoginClick }) {
               <>
                 <li className="nav-item">
                   <span className="nav-link user-greeting">Hola, {user.nombre}</span>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/user-info">Información de Usuario</Link>
                 </li>
                 {user.rol === "admin" && (
                   <li className="nav-item">

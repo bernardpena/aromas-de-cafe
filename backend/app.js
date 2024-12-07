@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 // Rutas
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
-app.use("/api/cart", cartRoutes);
+app.use("/api", cartRoutes);
 app.use("/api/sales", salesRoutes);
 
 // error 404
