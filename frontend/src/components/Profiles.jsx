@@ -12,16 +12,33 @@ function Profile() {
   });
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`https://backend-585p.onrender.com/api/user/profile`, {
+          method: 'GET',
+          headers: { 
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          setUser(userData); // Actualiza el contexto con los datos del usuario
+          setFormData(userData); // Establece los datos del usuario en el estado
+        } else {
+          const errorText = await response.text();
+          alert(errorText || 'Error al cargar los datos del perfil');
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos del perfil:', error);
+        alert('Hubo un problema al cargar el perfil: ' + error.message);
+      }
+    };
+
     if (user) {
-      setFormData({
-        email: user.email,
-        nombre: user.nombre,
-        calle: user.calle,
-        ciudad: user.ciudad,
-        comuna: user.comuna,
-      });
+      fetchUserData();
     }
-  }, [user]);
+  }, [user, setUser]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
