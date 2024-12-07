@@ -1,38 +1,3 @@
-// import React, { useContext } from 'react';
-// import { UserContext } from '../context/UserProvider';
-// import { useNavigate } from 'react-router-dom';
-// import '../assets/css/UserInfo.css';
-
-// const UserInfo = () => {
-//     const { user } = useContext(UserContext);
-//     const navigate = useNavigate();
-
-//     const handleLogout = () => {
-//         localStorage.removeItem('token');
-//         navigate('/');
-//     };
-
-//     if (!user) {
-//         return <div className="not-found">Por favor, inicia sesión para ver tu información.</div>;
-//     }
-
-//     return (
-//         <div className="user-info-container">
-//             <h1>Información del Usuario</h1>
-//             <div className="user-info-card">
-//                 <h2>{user.nombre}</h2>
-//                 <p><strong>Email:</strong> {user.email}</p>
-//                 <p><strong>Calle:</strong> {user.calle}</p>
-//                 <p><strong>Ciudad:</strong> {user.ciudad}</p>
-//                 <p><strong>Comuna:</strong> {user.comuna}</p>
-//                 {/* <p><strong>Rol:</strong> {user.rol}</p> */}
-//                 <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
-//             </div>
-//         </div>
-//     );
-// };
-
-
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../context/UserProvider';
 
@@ -47,33 +12,16 @@ function Profile() {
   });
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(`https://backend-585p.onrender.com/api/user/profile`, {
-          method: 'GET',
-          headers: { 
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-
-        if (response.ok) {
-          const userData = await response.json();
-          setUser(userData); 
-          setFormData(userData); 
-        } else {
-          const errorText = await response.text();
-          alert(errorText || 'Error al cargar los datos del perfil');
-        }
-      } catch (error) {
-        console.error('Error al obtener los datos del perfil:', error);
-        alert('Hubo un problema al cargar el perfil: ' + error.message);
-      }
-    };
-
     if (user) {
-      fetchUserData();
+      setFormData({
+        email: user.email,
+        nombre: user.nombre,
+        calle: user.calle,
+        ciudad: user.ciudad,
+        comuna: user.comuna,
+      });
     }
-  }, [user, setUser]);
+  }, [user]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -171,4 +119,5 @@ function Profile() {
     </div>
   );
 }
-export default UserInfo;
+
+export default Profile;

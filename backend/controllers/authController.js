@@ -87,6 +87,45 @@ exports.login = async (req, res) => {
       .json({ message: "Error al iniciar sesión", error: error.message });
   }
 };
+// Obtener perfil del usuario
+exports.getProfile = async (req, res) => {
+  try {
+    const userId = req.user.id; 
+    const user = await pool.query("SELECT id, nombre, email, calle, ciudad, comuna, rol FROM usuarios WHERE id = $1", [userId]);
+
+    if (user.rows.length === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.status(200).json(user.rows[0]); 
+  } catch (error) {
+    console.error("Error al obtener perfil:", error);
+    res.status(500).json({ message: "Error al obtener perfil" });
+  }
+};
+
+// Actualizar perfil del usuario
+exports.updateProfile = async (req, res) => {
+  try {
+    const userId = req.user.id; // Asumiendo que tienes el ID del usuario en `req.user.id`
+    const { nombre, email, calle, ciudad, comuna } = req.body;
+
+    const updatedUser = await pool.query(
+      "UPDATE usuarios SET nombre = $1, email = $2, calle = $3, ciudad = $4, comuna = $5 WHERE id = $6 RETURNING *",
+      [nombre, email, calle, ciudad, comuna, userId]
+    );
+
+    if (updatedUser.rows.length === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.status(200).json(updatedUser.rows[0]); 
+  } catch (error) {
+    console.error("Error al actualizar perfil:", error);
+    res.status(500).json({ message: "Error al actualizar perfil" });
+  }
+};
+
 
 // agregar administrador
 exports.addAdministrator = async (req, res) => {
