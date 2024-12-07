@@ -16,7 +16,8 @@ import TerminosDeServicio from '../src/components/TerminosDeServicio';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import Ventas from '../src/components/Ventas';
-import UserInfo from "./components/UserInfo";
+import UserInfo from "../components/UserInfo";
+import NotFound from '../NotFound';
 
 function App() {
   const [isLoginVisible, setLoginVisible] = useState(false);
@@ -51,6 +52,7 @@ function App() {
             <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
             <Route path="/ventas" element={<Ventas />} />
             <Route path="/user-info" element={<UserInfo />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer onOpenLogin={handleOpenLogin} />
         </Router>
