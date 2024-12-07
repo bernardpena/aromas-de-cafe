@@ -11,10 +11,34 @@ function Login({ onClose }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     // const response = await fetch('http://localhost:5001/api/auth/login', {
+  //     const response = await fetch(`https://backend-585p.onrender.com/api/auth/login`, {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       localStorage.setItem('token', data.token);
+
+  //       setUser(data.user);
+  //       onClose();
+  //     } else {
+  //       const errorText = await response.text();
+  //       alert(errorText || 'Credenciales inválidas');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error durante el inicio de sesión:', error);
+  //     alert('Hubo un problema al iniciar sesión: ' + error.message);
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // const response = await fetch('http://localhost:5001/api/auth/login', {
       const response = await fetch(`https://backend-585p.onrender.com/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -24,8 +48,18 @@ function Login({ onClose }) {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        setUser(data.user);
-        onClose();
+        const userResponse = await fetch(`https://backend-585p.onrender.com/api/auth/me`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${data.token}`,
+          },
+        });
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          setUser(userData);
+          onClose();
+        }
       } else {
         const errorText = await response.text();
         alert(errorText || 'Credenciales inválidas');
