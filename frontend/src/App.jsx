@@ -16,8 +16,8 @@ import TerminosDeServicio from '../src/components/TerminosDeServicio';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import Ventas from '../src/components/Ventas';
-import UserInfo from "../components/UserInfo";
-import NotFound from '../NotFound';
+import UserInfo from "./components/UserInfo";
+import NotFound from './NotFound';
 
 function App() {
   const [isLoginVisible, setLoginVisible] = useState(false);
