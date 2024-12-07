@@ -16,7 +16,7 @@ import TerminosDeServicio from '../src/components/TerminosDeServicio';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import Ventas from '../src/components/Ventas';
-import UserInfo from "../src/components/UserInfo";
+// import UserInfo from "../src/components/UserInfo";
 import Profiles from "../src/components/Profiles";
 import NotFound from '../src/components/NotFound';
 

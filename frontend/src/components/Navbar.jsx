@@ -35,7 +35,7 @@ function Navbar({ onLoginClick }) {
                   <span className="nav-link user-greeting">Hola, {user.nombre}</span>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/user-info">Perfil</Link>
+                  <Link className="nav-link" to="/profiles">Perfil</Link>
                 </li>
                 {user.rol === "admin" && (
                   <li className="nav-item">
