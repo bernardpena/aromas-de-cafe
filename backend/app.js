@@ -27,13 +27,13 @@ app.use("/api/products", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api/sales", salesRoutes);
 
-// Redirigir todo a index.html después del build
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// // Redirigir todo a index.html después del build
+// app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-// Redirigir  a index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-});
+// // Redirigir  a index.html
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+// });
 
 // Middleware de errores internos
 app.use((err, req, res, next) => {
