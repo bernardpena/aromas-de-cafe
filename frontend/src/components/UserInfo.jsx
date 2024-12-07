@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../context/UserProvider';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const UserInfo = () => {
     const { user } = useContext(UserContext);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem('token');
