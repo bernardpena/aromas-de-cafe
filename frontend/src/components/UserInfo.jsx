@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../context/UserProvider';
 import { useNavigate } from 'react-router-dom';
+import '../assets/css/UserInfo.css';
 
 const UserInfo = () => {
     const { user } = useContext(UserContext);
@@ -8,22 +9,22 @@ const UserInfo = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-
         navigate('/');
     };
 
     if (!user) {
-        return <div>Por favor, inicia sesión para ver tu información.</div>;
+        return <div className="not-found">Por favor, inicia sesión para ver tu información.</div>;
     }
 
     return (
-        <div className="user-info">
+        <div className="user-info-container">
             <h1>Información del Usuario</h1>
-            <p><strong>Nombre:</strong> {user.nombre}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Rol:</strong> {user.rol}</p>
-            {/* mas campos para agregar */}
-            <button onClick={handleLogout}>Cerrar Sesión</button>
+            <div className="user-info-card">
+                <h2>{user.nombre}</h2>
+                <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Rol:</strong> {user.rol}</p>
+                <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
+            </div>
         </div>
     );
 };
