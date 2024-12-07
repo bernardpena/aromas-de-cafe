@@ -36,6 +36,11 @@ app.use((err, req, res, next) => {
   res.status(500).send("Algo salió mal!");
 });
 
+//redirigir todo a index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 db.connect((err) => {
   if (err) {
     console.error("Error al conectar a la base de datos:", err);
