@@ -27,23 +27,20 @@ app.use("/api/products", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api/sales", salesRoutes);
 
-// Redirigir todo a index.html
+// Redirigir todo a index.html después del build
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+// Redirigir  a index.html
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/index.html")); // Ajusta este camino según sea necesario.
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
-// Middleware errores 404
-app.use((req, res) => {
-  res.status(404).json({ error: "Ruta no encontrada" });
-});
-
-// Middleware errores internos
+// Middleware de errores internos
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Algo salió mal!");
 });
 
-// Conexión a la base de datos
 db.connect((err) => {
   if (err) {
     console.error("Error al conectar a la base de datos:", err);
