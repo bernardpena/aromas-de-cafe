@@ -17,7 +17,7 @@ import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
 import Ventas from '../src/components/Ventas';
 import UserInfo from "../src/components/UserInfo";
-import Profile from "../src/components/Profiles";
+import Profiles from "../src/components/Profiles";
 import NotFound from '../src/components/NotFound';
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
             <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
             <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
             <Route path="/ventas" element={<Ventas />} />
-            <Route path="/user-info" element={<Profile />} />
+            <Route path="/profiles" element={<Profiles />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer onOpenLogin={handleOpenLogin} />
