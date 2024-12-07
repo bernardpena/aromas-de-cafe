@@ -9,7 +9,7 @@ const UserInfo = () => {
     const handleLogout = () => {
         localStorage.removeItem('token');
 
-        history.push('/');
+        navigate('/');
     };
 
     if (!user) {
