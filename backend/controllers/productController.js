@@ -1,5 +1,4 @@
 const pool = require("../config/db");
-// const path = require("path");
 
 exports.getProducts = async (req, res) => {
   try {
@@ -16,7 +15,7 @@ exports.updateProduct = async (req, res) => {
   const { activo } = req.body;
 
   try {
-    const result = await db.query(
+    const result = await pool.query( // Cambiado de db a pool
       "UPDATE productos SET activo = $1 WHERE id = $2 RETURNING *",
       [activo, id]
     );
@@ -38,7 +37,9 @@ exports.getProductById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const product = await Product.findById(id);
+    const result = await pool.query("SELECT * FROM productos WHERE id = $1", [id]); // Corrección aquí
+    const product = result.rows[0];
+
     if (!product) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
@@ -48,7 +49,6 @@ exports.getProductById = async (req, res) => {
     res.status(500).json({ message: "Error al buscar el producto" });
   }
 };
-
 // const pool = require("../config/db");
 
 // exports.getProducts = async (req, res) => {
