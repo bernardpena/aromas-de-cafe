@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { UserContext } from '../context/UserProvider'; // Ajusta la importación aquí
 import '../assets/css/productList.css';
 
 function AdminProductManagement() {
-    const { user } = useContext(AuthContext);
+    const { user } = useContext(UserContext);
     const [products, setProducts] = useState([]);
 
     // Verifica si el usuario tiene el rol de Admin
@@ -23,7 +23,7 @@ function AdminProductManagement() {
         };
 
         fetchProducts();
-    }, []);
+    }, []); // 
 
     const handleToggleProductStatus = async (productId, currentStatus) => {
         try {
