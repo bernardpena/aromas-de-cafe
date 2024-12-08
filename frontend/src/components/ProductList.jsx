@@ -3,8 +3,6 @@ import { CartContext } from '../context/CartContext';
 import '../assets/css/productList.css';
 import dotenv from 'dotenv';
 
-// const REACT_APP_API_URL = 'https://backend-585p.onrender.com';
-// const apiUrl = process.env.REACT_APP_API_URL;
 
 function ProductList() {
     const { addToCart } = useContext(CartContext);

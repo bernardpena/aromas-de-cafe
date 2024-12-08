@@ -38,9 +38,14 @@ function Navbar({ onLoginClick }) {
                   <Link className="nav-link" to="/profiles">Perfil</Link>
                 </li>
                 {user.rol === "admin" && (
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/ventas">Ventas</Link>
-                  </li>
+                  <>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/admin-product-management">Administrar Productos</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/ventas">Ventas</Link>
+                    </li>
+                  </>
                 )}
                 <li className="nav-item">
                   <a className="nav-link" href="#" onClick={handleLogout}>
