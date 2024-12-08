@@ -7,7 +7,7 @@ const cartRoutes = require("./routes/cartRoutes");
 const salesRoutes = require("./routes/salesRoutes");
 require("dotenv").config();
 const db = require("./config/db");
-const path = require("path");
+// const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://aromas-de-cafe.onrender.com",
-    // credentials: true,
+    credentials: true,
   })
 );
 

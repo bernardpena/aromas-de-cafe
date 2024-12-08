@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../context/UserProvider';
-const path = require("path");
 import '../assets/css/productList.css';
+// const path = require("path");
 
 function AdminProductManagement() {
     const { user } = useContext(UserContext);
