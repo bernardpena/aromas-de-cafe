@@ -17,7 +17,7 @@ router.post(
 router.post("/login", authController.login);
 
 // Ruta para obtener los datos del perfil del usuario
-router.get("/user/profiles", authenticate, authController.getProfile);
+router.get("/profiles", authenticate, authController.getProfile);
 
 // Ruta para actualizar los datos del usuario
 router.put("/update", authenticate, authController.updateProfile);
