@@ -33,21 +33,19 @@ function AdminProductManagement() {
                 },
                 body: JSON.stringify({ activo: !currentStatus }),
             });
-            console.log("Actualizando el producto con ID:", id);
     
             if (!response.ok) {
                 const errorText = await response.text();
-                throw new Error(`Error al actualizar el producto: ${response.status} - ${errorText}`);
+                throw new Error(`Error: ${response.status} - ${errorText}`);
             }
     
             const data = await response.json();
-            // Actualiza el estado del producto
             setProducts(products.map(product =>
                 product.id === id ? { ...product, activo: !currentStatus } : product
             ));
         } catch (error) {
             console.error('Error al hacer la solicitud:', error);
-            alert('Error inesperado al intentar actualizar el producto. ' + error.message);
+            alert('Error inesperado al intentar actualizar el producto.' + error.message);
         }
     };
 
