@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://aromas-de-cafe.onrender.com",
-    credentials: true,
+    // credentials: true,
   })
 );
 
