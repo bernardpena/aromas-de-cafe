@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../context/UserProvider';
+const path = require("path");
 import '../assets/css/productList.css';
 
 function AdminProductManagement() {
@@ -34,6 +35,7 @@ function AdminProductManagement() {
                 body: JSON.stringify({ activo: !currentStatus }),
             });
             console.log(`Actualizando el producto con ID: ${productId}`);
+            
             if (response.ok) {
                 setProducts(products.map(product =>
                     product.id === productId ? { ...product, activo: !currentStatus } : product
@@ -41,9 +43,11 @@ function AdminProductManagement() {
             } else {
                 const errorText = await response.text();
                 console.error('Error al actualizar el estado del producto:', errorText);
+                alert('No se pudo actualizar el estado del producto. Inténtalo de nuevo.');
             }
         } catch (error) {
             console.error('Error al hacer la solicitud:', error);
+            alert('Error inesperado al intentar actualizar el producto. Inténtalo de nuevo.');
         }
     };
 
