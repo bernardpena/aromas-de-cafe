@@ -15,14 +15,17 @@ exports.updateProduct = async (req, res) => {
   const { activo } = req.body;
 
   try {
-    const product = await Product.findByIdAndUpdate(
-      id,
-      { activo },
-      { new: true }
+    const result = await db.query(
+      "UPDATE productos SET activo = $1 WHERE id = $2 RETURNING *",
+      [activo, id]
     );
+
+    const product = result.rows[0];
+
     if (!product) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
+
     res.status(200).json(product);
   } catch (error) {
     console.error("Error al actualizar el producto:", error);
