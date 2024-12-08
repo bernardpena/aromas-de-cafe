@@ -35,13 +35,14 @@ app.use((err, req, res, next) => {
   res.status(500).send("Algo salió mal!");
 });
 
-db.connect((err) => {
-  if (err) {
+db.query('SELECT NOW()', [])
+  .then(res => {
+    console.log("Base de datos conectada y consulta inicial exitosa:", res.rows);
+  })
+  .catch(err => {
     console.error("Error al conectar a la base de datos:", err);
     process.exit(1);
-  }
-  console.log("Conexión a la base de datos establecida correctamente.");
-});
+  });
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 5001;
