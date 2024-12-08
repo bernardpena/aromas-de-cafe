@@ -13,6 +13,8 @@ function Profile() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -26,13 +28,8 @@ function Profile() {
         if (response.ok) {
           const userData = await response.json();
           setUser(userData);
-          setFormData({
-            email: userData.email || '',
-            nombre: userData.nombre || '',
-            calle: userData.calle || '',
-            ciudad: userData.ciudad || '',
-            comuna: userData.comuna || '',
-          });
+          setFormData(userData);
+          setIsLoaded(true);
         } else {
           const errorText = await response.text();
           setError(errorText || 'Error al cargar los datos del perfil');
@@ -44,10 +41,10 @@ function Profile() {
     };
 
     // Solo si existe user se realiza la llamada
-    if (user) {
+    if (user && !isLoaded) {
       fetchUserData();
     }
-  }, [user, setUser]);
+  }, [user, setUser, isLoaded]);
 
   // const handleChange = (e) => {
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
