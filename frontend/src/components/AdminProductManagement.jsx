@@ -23,7 +23,7 @@ function AdminProductManagement() {
         };
 
         fetchProducts();
-    }, []); // 
+    }, []);
 
     const handleToggleProductStatus = async (productId, currentStatus) => {
         try {
