@@ -26,7 +26,13 @@ function Profile() {
         if (response.ok) {
           const userData = await response.json();
           setUser(userData);
-          setFormData(userData);
+          setFormData({
+            email: userData.email || '',
+            nombre: userData.nombre || '',
+            calle: userData.calle || '',
+            ciudad: userData.ciudad || '',
+            comuna: userData.comuna || '',
+          });
         } else {
           const errorText = await response.text();
           setError(errorText || 'Error al cargar los datos del perfil');
@@ -43,8 +49,16 @@ function Profile() {
     }
   }, [user, setUser]);
 
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(`${e.target.name}: ${e.target.value}`);
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -89,7 +103,7 @@ function Profile() {
             className="form-control"
             id="nombre"
             name="nombre"
-            value={formData.nombre}
+            value={formData.nombre || ''}
             onChange={handleChange}
             required
           />
@@ -101,7 +115,7 @@ function Profile() {
             className="form-control"
             id="email"
             name="email"
-            value={formData.email}
+            value={formData.email || ''}
             onChange={handleChange}
             required
           />
@@ -113,7 +127,7 @@ function Profile() {
             className="form-control"
             id="calle"
             name="calle"
-            value={formData.calle}
+            value={formData.calle || ''}
             onChange={handleChange}
           />
         </div>
@@ -124,7 +138,7 @@ function Profile() {
             className="form-control"
             id="ciudad"
             name="ciudad"
-            value={formData.ciudad}
+            value={formData.ciudad || ''}
             onChange={handleChange}
           />
         </div>
@@ -135,7 +149,7 @@ function Profile() {
             className="form-control"
             id="comuna"
             name="comuna"
-            value={formData.comuna}
+            value={formData.comuna || ''}
             onChange={handleChange}
           />
         </div>
