@@ -16,9 +16,9 @@ function Profile() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`https://backend-585p.onrender.com/api/user/profile`, {
+        const response = await fetch(`https://backend-585p.onrender.com/api/user/profiles`, {
           method: 'GET',
-          headers: { 
+          headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
           },
         });
@@ -52,7 +52,7 @@ function Profile() {
     try {
       const response = await fetch(`https://backend-585p.onrender.com/api/user/update`, {
         method: 'PUT',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
