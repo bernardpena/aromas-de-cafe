@@ -25,6 +25,7 @@ function Login({ onClose }) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
 
+        console.log("User Data:", data.user);
         setUser(data.user);
         onClose();
       } else {
@@ -37,7 +38,7 @@ function Login({ onClose }) {
     }
   };
 
-  
+
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className="mt-4">

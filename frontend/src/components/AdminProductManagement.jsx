@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { UserContext } from '../context/UserProvider'; // Ajusta la importación aquí
+import { UserContext } from '../context/UserProvider';
 import '../assets/css/productList.css';
 
 function AdminProductManagement() {
@@ -8,6 +8,7 @@ function AdminProductManagement() {
 
     // Verifica si el usuario tiene el rol de Admin
     if (!user || user.role !== 'admin') {
+        console.log(user);
         return <div>No tienes permiso para acceder a esta página.</div>;
     }
 
