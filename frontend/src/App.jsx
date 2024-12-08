@@ -19,6 +19,7 @@ import Ventas from '../src/components/Ventas';
 // import UserInfo from "../src/components/UserInfo";
 import Profiles from "../src/components/Profiles";
 import NotFound from '../src/components/NotFound';
+import AdminProductManagement from '../src/components/AdminProductManagement'; // Importa el nuevo componente
 
 function App() {
   const [isLoginVisible, setLoginVisible] = useState(false);
@@ -53,6 +54,7 @@ function App() {
             <Route path="/terminos-de-servicio" element={<TerminosDeServicio />} />
             <Route path="/ventas" element={<Ventas />} />
             <Route path="/profiles" element={<Profiles />} />
+            <Route path="/admin-product-management" element={<AdminProductManagement />} /> {/* Nueva ruta */}
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer onOpenLogin={handleOpenLogin} />
