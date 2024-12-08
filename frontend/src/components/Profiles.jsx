@@ -25,8 +25,8 @@ function Profile() {
 
         if (response.ok) {
           const userData = await response.json();
-          setUser(userData); // Actualiza el contexto con los datos del usuario
-          setFormData(userData); // Establece los datos del usuario en el estado
+          setUser(userData);
+          setFormData(userData);
         } else {
           const errorText = await response.text();
           setError(errorText || 'Error al cargar los datos del perfil');
@@ -50,7 +50,7 @@ function Profile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://backend-585p.onrender.com/api/user/update`, {
+      const response = await fetch(`https://backend-585p.onrender.com/api/auth/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -79,8 +79,8 @@ function Profile() {
   return (
     <div className="container">
       <h1>Perfil de Usuario</h1>
-      {message && <div className="alert alert-success">{message}</div>} {/* Mensaje de éxito */}
-      {error && <div className="alert alert-danger">{error}</div>} {/* Mensaje de error */}
+      {message && <div className="alert alert-success">{message}</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="nombre" className="form-label">Nombre</label>
