@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 // Rutas
 app.use("/api/auth", authRoutes);
-app.use("/api/profiles", authRoutes);
+app.use("/api/user/profiles", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api/sales", salesRoutes);
