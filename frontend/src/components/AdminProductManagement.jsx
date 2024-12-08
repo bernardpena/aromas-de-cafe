@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../context/UserProvider';
 import '../assets/css/productList.css';
-// const path = require("path");
 
 function AdminProductManagement() {
     const { user } = useContext(UserContext);
@@ -25,7 +24,7 @@ function AdminProductManagement() {
         fetchProducts();
     }, []);
 
-    const handleToggleProductStatus = async (productId, currentStatus) => {
+    const handleToggleProductStatus = async (id, currentStatus) => {
         try {
             const response = await fetch(`https://backend-585p.onrender.com/api/products/${id}`, {
                 method: 'PATCH',
@@ -34,6 +33,7 @@ function AdminProductManagement() {
                 },
                 body: JSON.stringify({ activo: !currentStatus }),
             });
+            console.log("Actualizando el producto con ID:", id);
     
             if (!response.ok) {
                 const errorText = await response.text();
@@ -43,7 +43,7 @@ function AdminProductManagement() {
             const data = await response.json();
             // Actualiza el estado del producto
             setProducts(products.map(product =>
-                product.id === productId ? { ...product, activo: !currentStatus } : product
+                product.id === id ? { ...product, activo: !currentStatus } : product
             ));
         } catch (error) {
             console.error('Error al hacer la solicitud:', error);
