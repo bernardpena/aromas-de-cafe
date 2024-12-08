@@ -7,6 +7,7 @@ const { register, login } = require("../controllers/authController");
 router.post("/register", register);
 router.post("/login", login);
 router.get("/", productController.getProducts);
+router.get("/products/:id", productController.getProductById);
 
 // Middleware
 router.use((err, req, res, next) => {

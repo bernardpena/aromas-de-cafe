@@ -31,7 +31,7 @@ function AdminProductManagement() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ activo: !currentStatus }), // Cambia el estado del producto
+                body: JSON.stringify({ activo: !currentStatus }),
             });
             console.log(`Actualizando el producto con ID: ${productId}`);
             if (response.ok) {

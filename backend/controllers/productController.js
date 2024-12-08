@@ -12,7 +12,7 @@ exports.getProducts = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { activo } = req.body; // Cambia este nombre según lo que estés pasando en el cuerpo de la solicitud
+  const { activo } = req.body;
 
   try {
     const product = await Product.findByIdAndUpdate(
@@ -28,5 +28,20 @@ exports.updateProduct = async (req, res) => {
   } catch (error) {
     console.error("Error en la actualización del producto:", error);
     res.status(500).json({ message: "Error al actualizar producto" });
+  }
+};
+
+exports.getProductById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).json({ message: "Producto no encontrado" });
+    }
+    res.json(product); // Devuelve el producto encontrado
+  } catch (error) {
+    console.error("Error al buscar el producto:", error);
+    res.status(500).json({ message: "Error al buscar el producto" });
   }
 };
