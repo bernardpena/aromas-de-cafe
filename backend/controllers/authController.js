@@ -90,14 +90,17 @@ exports.login = async (req, res) => {
 // Obtener perfil del usuario
 exports.getProfile = async (req, res) => {
   try {
-    const userId = req.user.id; 
-    const user = await pool.query("SELECT id, nombre, email, calle, ciudad, comuna, rol FROM usuarios WHERE id = $1", [userId]);
+    const userId = req.user.id;
+    const user = await pool.query(
+      "SELECT id, nombre, email, calle, ciudad, comuna, rol FROM usuarios WHERE id = $1",
+      [userId]
+    );
 
     if (user.rows.length === 0) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    res.status(200).json(user.rows[0]); 
+    res.status(200).json(user.rows[0]);
   } catch (error) {
     console.error("Error al obtener perfil:", error);
     res.status(500).json({ message: "Error al obtener perfil" });
@@ -107,7 +110,7 @@ exports.getProfile = async (req, res) => {
 // Actualizar perfil del usuario
 exports.updateProfile = async (req, res) => {
   try {
-    const userId = req.user.id; // Asumiendo que tienes el ID del usuario en `req.user.id`
+    const userId = req.user.id;
     const { nombre, email, calle, ciudad, comuna } = req.body;
 
     const updatedUser = await pool.query(
@@ -119,13 +122,12 @@ exports.updateProfile = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    res.status(200).json(updatedUser.rows[0]); 
+    res.status(200).json(updatedUser.rows[0]);
   } catch (error) {
     console.error("Error al actualizar perfil:", error);
     res.status(500).json({ message: "Error al actualizar perfil" });
   }
 };
-
 
 // agregar administrador
 exports.addAdministrator = async (req, res) => {
