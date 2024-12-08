@@ -27,28 +27,27 @@ function AdminProductManagement() {
 
     const handleToggleProductStatus = async (productId, currentStatus) => {
         try {
-            // const response = await fetch(`https://backend-585p.onrender.com/api/products/${productId}`, {
-            const response = await fetch(`https://backend-585p.onrender.com/api/products/${id}`, {
+            const response = await fetch(`https://backend-585p.onrender.com/api/products/${Id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ activo: !currentStatus }),
             });
-            console.log(`Actualizando el producto con ID: ${productId}`);
-            
-            if (response.ok) {
-                setProducts(products.map(product =>
-                    product.id === productId ? { ...product, activo: !currentStatus } : product
-                ));
-            } else {
+    
+            if (!response.ok) {
                 const errorText = await response.text();
-                console.error('Error al actualizar el estado del producto:', errorText);
-                alert('No se pudo actualizar el estado del producto. Inténtalo de nuevo.');
+                throw new Error(`Error al actualizar el producto: ${response.status} - ${errorText}`);
             }
+    
+            const data = await response.json();
+            // Actualiza el estado del producto
+            setProducts(products.map(product =>
+                product.id === productId ? { ...product, activo: !currentStatus } : product
+            ));
         } catch (error) {
             console.error('Error al hacer la solicitud:', error);
-            alert('Error inesperado al intentar actualizar el producto. Inténtalo de nuevo.');
+            alert('Error inesperado al intentar actualizar el producto. ' + error.message);
         }
     };
 
