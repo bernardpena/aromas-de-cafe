@@ -19,6 +19,15 @@ const pool = new Pool({
   },
 });
 
+// monitorear conexiones
+pool.on('connect', () => {
+  console.log('Conectado a la base de datos');
+});
+
+pool.on('error', (err) => {
+  console.error('Error en la conexión a la base de datos', err);
+});
+
 module.exports = {
   query: (text, params) => pool.query(text, params),
 };
