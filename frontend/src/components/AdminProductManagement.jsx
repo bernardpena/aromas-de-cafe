@@ -33,6 +33,7 @@ function AdminProductManagement() {
                 },
                 body: JSON.stringify({ activo: !currentStatus }), // Cambia el estado del producto
             });
+            console.log(`Actualizando el producto con ID: ${productId}`);
             if (response.ok) {
                 setProducts(products.map(product =>
                     product.id === productId ? { ...product, activo: !currentStatus } : product
