@@ -26,6 +26,7 @@ function AdminProductManagement() {
 
     const handleToggleProductStatus = async (id, currentStatus) => {
         try {
+            console.log("ID del producto:", id);
             const response = await fetch(`https://backend-585p.onrender.com/api/products/${id}`, {
                 method: 'PATCH',
                 headers: {
