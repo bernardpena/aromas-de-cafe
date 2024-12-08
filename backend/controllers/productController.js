@@ -19,15 +19,14 @@ exports.updateProduct = async (req, res) => {
       id,
       { activo },
       { new: true }
-    ); // Asegúrate de que esto funcione correctamente
+    );
     if (!product) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
-
-    res.status(200).json(product); // Devuelve el producto actualizado
+    res.status(200).json(product);
   } catch (error) {
-    console.error("Error en la actualización del producto:", error);
-    res.status(500).json({ message: "Error al actualizar producto" });
+    console.error("Error al actualizar el producto:", error);
+    res.status(500).json({ message: "Error al actualizar el producto" });
   }
 };
 
@@ -39,7 +38,7 @@ exports.getProductById = async (req, res) => {
     if (!product) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
-    res.json(product); // Devuelve el producto encontrado
+    res.json(product);
   } catch (error) {
     console.error("Error al buscar el producto:", error);
     res.status(500).json({ message: "Error al buscar el producto" });

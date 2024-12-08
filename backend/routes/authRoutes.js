@@ -28,6 +28,6 @@ router.post("/add-admin", authController.addAdministrator);
 
 // Rutas para productos
 router.get("/products", authenticate, productController.getProducts);
-router.patch("/products/:id", authenticate, productController.updateProduct);
+router.patch("/products/:id", productController.updateProduct);
 
 module.exports = router;

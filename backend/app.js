@@ -16,10 +16,11 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://aromas-de-cafe.onrender.com",
+    credentials: true,
   })
 );
-//credentials: true,
-app.use(bodyParser.json());
+
+// app.use(bodyParser.json());
 
 // Rutas
 app.use("/api/auth", authRoutes);

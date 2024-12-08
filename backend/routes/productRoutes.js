@@ -8,6 +8,8 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/", productController.getProducts);
 router.get("/products/:id", productController.getProductById);
+router.get("/:id", productController.getProductById);
+router.patch("/:id", productController.updateProduct);
 
 // Middleware
 router.use((err, req, res, next) => {
