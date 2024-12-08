@@ -38,7 +38,8 @@ function AdminProductManagement() {
                     product.id === productId ? { ...product, activo: !currentStatus } : product
                 ));
             } else {
-                console.error('Error al actualizar el estado del producto');
+                const errorText = await response.text();
+                console.error('Error al actualizar el estado del producto:', errorText);
             }
         } catch (error) {
             console.error('Error al hacer la solicitud:', error);
