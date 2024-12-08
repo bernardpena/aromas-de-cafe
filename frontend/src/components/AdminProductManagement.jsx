@@ -3,12 +3,11 @@ import { UserContext } from '../context/UserProvider';
 import '../assets/css/productList.css';
 
 function AdminProductManagement() {
-    const { user } = useContext(UserContext);
+    const { user } = useContext(UserContext); // Asegúrate de que estás accediendo al UserContext
     const [products, setProducts] = useState([]);
 
     // Verifica si el usuario tiene el rol de Admin
-    if (!user || user.rol !== 'admin') {
-        console.log(user);
+    if (!user || user.rol !== 'admin') { // Asegúrate de que estás comparando correctamente
         return <div>No tienes permiso para acceder a esta página.</div>;
     }
 
@@ -25,7 +24,6 @@ function AdminProductManagement() {
 
         fetchProducts();
     }, []);
-
     const handleToggleProductStatus = async (productId, currentStatus) => {
         try {
             const response = await fetch(`https://backend-585p.onrender.com/api/products/${productId}`, {
