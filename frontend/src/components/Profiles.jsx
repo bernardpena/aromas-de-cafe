@@ -16,7 +16,7 @@ function Profile() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`https://backend-585p.onrender.com/api/user/profiles`, {
+        const response = await fetch(`https://backend-585p.onrender.com/api/auth/profiles`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
