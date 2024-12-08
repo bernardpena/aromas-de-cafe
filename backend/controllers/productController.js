@@ -12,7 +12,7 @@ exports.getProducts = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { activo } = req.body; // Por ejemplo, el campo que se está actualizando
+  const { activo } = req.body; // Recibe el nuevo estado activo
 
   try {
     const product = await Product.findByIdAndUpdate(
@@ -23,7 +23,7 @@ exports.updateProduct = async (req, res) => {
     if (!product)
       return res.status(404).json({ message: "Producto no encontrado" });
 
-    res.json(product);
+    res.json({ message: "Producto actualizado", product });
   } catch (error) {
     res.status(500).json({ message: "Error al actualizar producto" });
   }
