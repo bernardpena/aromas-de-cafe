@@ -7,7 +7,7 @@ function AdminProductManagement() {
     const [products, setProducts] = useState([]);
 
     // Verifica si el usuario tiene el rol de Admin
-    if (!user || user.role !== 'admin') {
+    if (!user || user.rol !== 'admin') {
         console.log(user);
         return <div>No tienes permiso para acceder a esta página.</div>;
     }
